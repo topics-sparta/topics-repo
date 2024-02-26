@@ -6,8 +6,9 @@
 Many individuals struggle to track their nutritional intake effectively, leading to challenges in meeting dietary goals or addressing health concerns.
 
 **Target Audience:**  
-- Individuals striving to manage their weight.
+- Individuals striving to control their weight.
 - People with specific health conditions requiring dietary monitoring.
+- Individuals looking to bulk / cut weight
 
 **Occurrence of the Issue:**  
 This problem is experienced daily by individuals who are conscious about their health or have specific dietary requirements.
@@ -24,13 +25,16 @@ Addressing this problem is urgent due to the rising awareness of health issues r
 We propose the development of a Nutrition Tracker application. This application will allow users to seamlessly track their daily food consumption, including details such as calories, protein, sugars, etc.
 
 **Why this Solution:**  
-- Extensive market analysis revealed a gap in the availability of comprehensive and user-friendly nutrition tracking applications.
-- Feedback from potential users highlighted the need for a customizable solution that caters to individual dietary preferences and health goals.
+- Analysis revealed a gap in the availability of comprehensive and user-friendly nutrition tracking applications.
+- Usage of different applications highlighted the need for a customizable solution that caters to individual dietary preferences and health goals.
 
 **Features:**
 - Intuitive interface for easy food entry.
 - Customizable dietary preferences and health goals.
+- Weight tracking
 - Insights and recommendations based on tracked data.
+    - AI food / recipe suggestion based on calories left / input preferences
+
 - Weekly reports to monitor progress and trends.
 
 **Validation and Metrics:**  
@@ -39,7 +43,7 @@ We will measure the effectiveness of the solution by tracking user engagement, s
 ## Plan
 
 **Product Description:**  
-The Nutrition Tracker application is a mobile and web-based platform that enables users to log their daily food intake, view nutritional breakdowns, and receive personalized insights and recommendations.
+The Nutrition Tracker application is a mobile and/or web-based platform that enables users to log their daily food intake, view nutritional breakdowns, and receive personalized insights and recommendations.
 
 **Functionality:**  
 - Users can add food items manually or use barcode scanning for quick entry.
@@ -48,5 +52,5 @@ The Nutrition Tracker application is a mobile and web-based platform that enable
 - Insights and recommendations are provided based on tracked data and user preferences.
 
 **Validation:**  
-The solution will undergo rigorous testing to ensure accurate tracking and reliable insights. User feedback will be continuously collected and incorporated into future updates.
+The solution will undergo thorough testing to ensure accurate tracking and reliable insights. 
 
