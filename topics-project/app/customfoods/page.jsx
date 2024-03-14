@@ -25,14 +25,14 @@ export default function CustomFoodForm() {
     try {
 
       // if our forms have empty values change them to 0s
-      const handeledformData = {
+      const handledformData = {
         ...formData,
         protein: formData.protein === "" ? 0 : formData.protein,
         fat: formData.fat === "" ? 0 : formData.fat,
         carbs: formData.carbs === "" ? 0 : formData.carbs,
       };
       // send to supabase
-      await sendData(handeledformData);
+      await sendData(handledformData);
 
       // clear the form 
       setFormData({
