@@ -9,6 +9,10 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      poppins: ["Poppins", "sans"],
+      redHatText: ["Red Hat Text", "sans"],
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -18,6 +22,11 @@ module.exports = {
     },
     extend: {
       colors: {
+        // Using modern `rgb`, custom colors, docs: https://tailwindcss.com/docs/customizing-colors#using-css-variables
+        customPrimary: 'rgb(var(--primary-color) / <alpha-value>)',
+        customSecondary: 'rgb(var(--secondary-color) / <alpha-value>)',
+        customAccent: 'rgb(var(--accent-color) / <alpha-value>)',
+        // Rest is from Shadcn
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
