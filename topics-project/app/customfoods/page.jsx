@@ -1,60 +1,103 @@
 
+"use client";
 import { sendData, validateForm, handleSubmit } from "./action"
+import { useState } from "react";
+
+
 
 export default function CustomFoodForm() {
+  const [formData, setFormData] = useState({
+    food_name: '',
+    calories: '',
+    protein: '',
+    fat: '',
+    carbs: ''
+  })
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    //e.preventDefault();
+    try {
+      await sendData(formData);
+      setFormData({
+        food_name: '',
+        calories: '',
+        protein: '',
+        fat: '',
+        carbs: ''
+      });
+    } catch (error) {
+      console.error("Error submitting form: ", error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#FFF7ED] px-4 sm:px-6"> {/* Responsive padding */}
       <div className="p-4 sm:p-8 w-full max-w-md"> {/* Responsive padding and width */}
         <h1 className="text-[#4C220A] text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">Add Custom Food</h1> {/* Responsive text size */}
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-        <label className="text-[18px] text-[#4C220A]" htmlFor="foodName">Food Name:</label>
+        <form  className="flex flex-col space-y-4">
+        <label className="text-[18px] text-[#4C220A]" htmlFor="food_name">Food Name:</label>
         <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the calorie amount (Kcal)"
-        id="Calorie Count"
-        name="Calorie Count"
-        type="number"
-        min="0"
+        id="food_name"
+        name="food_name"
+        type="text"
+        value={formData.food_name}
+        onChange={handleChange}
         required
       />
-      <label className="text-[18px] text-[#4C220A]" htmlFor="Calories">Calorie Count:</label>
+      <label className="text-[18px] text-[#4C220A]" htmlFor="calories">Calorie Count:</label>
       <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the calorie amount (Kcal)"
-        id="Calorie Count"
-        name="Calorie Count"
+        id="calories"
+        name="calories"
         type="number"
         min="0"
+        value={formData.calories}
+        onChange={handleChange}
         required
       />
-      <label className="text-[18px] text-[#4C220A]" htmlFor="Protein">Protein:</label>
+      <label className="text-[18px] text-[#4C220A]" htmlFor="protein">Protein:</label>
       <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the protein amount (g)"
-        id="Protein"
-        name="Protein"
+        id="protein"
+        name="protein"
         min="0"
+        value={formData.protein}
+        onChange={handleChange}
         type="number"
       />
-      <label className="text-[18px] text-[#4C220A]" htmlFor="Fat">Fat:</label>
+      <label className="text-[18px] text-[#4C220A]" htmlFor="fat">Fat:</label>
       <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the fat amount (g)"
-        id="Fat"
-        name="Fat"
+        id="fat"
+        name="fat"
         min="0"
+        value={formData.fat}
+        onChange={handleChange}
         type="number"
       />
-      <label className="text-[18px] text-[#4C220A]" htmlFor="Carbs">Carbs:</label>
+      <label className="text-[18px] text-[#4C220A]" htmlFor="carbs">Carbs:</label>
       <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the carbs amount (g)" 
-        id="Carbs"
-        name="Carbs"
+        id="carbs"
+        name="carbs"
         min="0"
+        value={formData.carbs}
+        onChange={handleChange}
         type="number"
       />
-      <button className="bg-[#D79C59] text-[#FFF7ED] py-2 px-4 sm:py-3 sm:px-6 rounded font-semibold mt-4 "type="submit">ADD FOOD</button>
+    <button className="bg-[#D79C59] text-[#FFF7ED] py-2 px-4 sm:py-3 sm:px-6 rounded font-semibold mt-4" formAction={handleSubmit}>ADD FOOD</button>
 
     </form>
     </div>
