@@ -1,11 +1,12 @@
 
 "use client";
-import { sendData, validateForm, handleSubmit } from "./action"
+import { sendData, } from "./action"
 import { useState } from "react";
 
 
 
 export default function CustomFoodForm() {
+  // states for out forms
   const [formData, setFormData] = useState({
     food_name: '',
     calories: '',
@@ -13,15 +14,27 @@ export default function CustomFoodForm() {
     fat: '',
     carbs: ''
   })
+  // handle typing
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // hand our form submission
   const handleSubmit = async (e) => {
-    //e.preventDefault();
     try {
-      await sendData(formData);
+
+      // if our forms have empty values change them to 0s
+      const handeledformData = {
+        ...formData,
+        protein: formData.protein === "" ? 0 : formData.protein,
+        fat: formData.fat === "" ? 0 : formData.fat,
+        carbs: formData.carbs === "" ? 0 : formData.carbs,
+      };
+      // send to supabase
+      await sendData(handeledformData);
+
+      // clear the form 
       setFormData({
         food_name: '',
         calories: '',
@@ -31,7 +44,6 @@ export default function CustomFoodForm() {
       });
     } catch (error) {
       console.error("Error submitting form: ", error);
-      // Handle error (e.g., show error message to user)
     }
   };
 
