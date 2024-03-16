@@ -5,7 +5,6 @@ import { createClient } from "/src/utils/supabase/client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import UserDetailsComp from "/src/components/user-details-comp.jsx";
-
 const supabase = createClient();
 
 const fetchUser = async () => {
