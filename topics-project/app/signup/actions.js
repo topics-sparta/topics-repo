@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "/src/utils/supabase/server";
 
@@ -21,13 +20,14 @@ export async function signup(formData) {
 
   };
 
-  const { error } = await supabase.auth.signUp(data);
+  try {
+    const { error } = await supabase.auth.signUp(data);
+    if (error) {
+      throw error;
+    }
+    redirect("/");
 
-  if (error) {
-    console.log(error);
+  } catch (error) {
     redirect("/error");
   }
-
-  revalidatePath("/", "layout");
-  redirect("/");
 }
