@@ -6,7 +6,7 @@ import Image from "next/image"
 
 export const Hero = () => {
     return (
-        <div className="w-full mb-4">
+        <div className="w-full mb-4 mt-4">
             <div className="lg:max-w-screen-xl mx-auto px-4 xl:px-0 flex flex-col gap-6 sm:gap-0 sm:grid grid-cols-2">
                 <div className="col-span-1 flex flex-col items-start gap-4 lg:gap-8">
                     <div className="flex flex-col font-poppins">
