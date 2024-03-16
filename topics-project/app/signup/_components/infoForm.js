@@ -3,7 +3,7 @@
 export const InfoForm = ({ formData, handleInputChange, toggleNext }) => {
   return (
     <div>
-      <form onSubmit={toggleNext} className="flex flex-col w-[400px]">
+      <form onSubmit={toggleNext} className="flex flex-col w-[300px] md:w-[400px]">
         <label
           className="text-2xl font-bold mb-2"
           htmlFor="name">Name</label>

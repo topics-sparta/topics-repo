@@ -4,7 +4,7 @@ export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="flex flex-col w-[400px] gap-1">
+      <form onSubmit={handleSubmit} className="flex flex-col w-[300px] md:w-[400px] gap-1">
         <label
           className="text-2xl font-bold mb-3"
           htmlFor="height">Height</label>

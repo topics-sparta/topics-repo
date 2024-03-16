@@ -41,17 +41,17 @@ export default function SignupPage() {
   return (
     <div className="min-h-[calc(100vh-64px)] bg-[#FFF7ED] font-poppins">
       <div className="min-h-[calc(100vh-64px)] flex flex-col justify-center items-center text-[#4C220A]">
-        <div className="flex justify-between w-[400px] items-center mb-4">
+        <div className="flex justify-between w-[300px] md:w-[400px] items-center mb-4">
 
-          <div className="w-10">
+          <div className="w-6 md:w-8">
             {showNext && (
-              <button onClick={toggleNext} className="w-10 h-10 border-customAccent border-2 bg-customSecondary rounded-full text-customPrimary hover:text-customAccent transition-colors duration-300">
-                <ChevronLeft className="w-10 h-10 md:w-8 md:h-8" />
+              <button onClick={toggleNext} className="w-8 h-8 md:w-10 md:h-10 border-customAccent border-2 bg-customSecondary rounded-full text-customPrimary hover:text-customAccent transition-colors duration-300">
+                <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
               </button>
             )}
           </div>
           <div className="text-5xl font-bold">Sign Up</div>
-          <div className="w-10"></div>
+          <div className="w-6 md:w-8"></div>
         </div>
 
         {showNext ? (
