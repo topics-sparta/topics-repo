@@ -7,7 +7,6 @@ import { createClient } from "/src/utils/supabase/server";
 export async function GET(request, context) {
   const supabase = createClient();
   const id = context.params.id;
-  console.log(id);
 
   const { data, error, status } = await supabase
     .from("users")
