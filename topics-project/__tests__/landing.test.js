@@ -7,8 +7,8 @@ describe('Landing Page', () => {
     it('renders sign up button', () => {
       render(<LandingPage />)
    
-      const signInButton = screen.getByRole('button', { name: "START TODAY" })
+      const signUpButton = screen.getByRole('button', { name: "START TODAY" })
    
-      expect(signInButton).toBeInTheDocument()
+      expect(signUpButton).toBeInTheDocument()
     })
   })
