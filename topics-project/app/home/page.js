@@ -2,73 +2,94 @@
 import { useState } from "react";
 import { Food } from './_components/food';
 import { CalendarCarousel } from './_components/calendarcarousel';
+import { CalendarSearch } from 'lucide-react';
 
 
 export default function HomePage() {
+    {/* Make mobile responsive and correct position for desktop*/}
+    {/* take array / storage from action . js and map to the food component (adjust UI of food component as well) */}
+
+    const name = "Johan";
+
+    function getFormattedDate() {
+        const daysOfWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+        const monthsOfYear = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+      
+        const currentDate = new Date();
+        const dayOfWeek = daysOfWeek[currentDate.getDay()];
+        const month = monthsOfYear[currentDate.getMonth()];
+        const dayOfMonth = currentDate.getDate();
+        
+        return `${dayOfWeek}, ${month} ${dayOfMonth}`;
+      }
+      
+      const formattedDate = getFormattedDate();
 
 
 
     return (
-        <div className="min-h-[calc(100vh-64px)] flex flex-col bg-customPrimary w-full">
+        <div className="lg:max-w-screen-xl mx-auto px-4 xl:px-0 flex flex-col bg-customPrimary w-full">
 
-            <div class="flex items-center justify-between p-4 border-b border-gray-200">
-            <div class="flex items-center">
-            <div class="w-10 h-10 bg-gray-200 rounded-full mr-4"></div>
-            <div>
-                <h1 class="text-xl font-semibold">Hello, Johan</h1>
-                <p class="text-sm text-gray-600">MONDAY, MAR 10</p>
-            </div>
-            </div>
-            <div>
-            <button class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7H5H21"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 20h12a2 2 0 002-2V9a2 2 0 00-2-2H6a2 2 0 00-2 2v9a2 2 0 002 2z"></path>
-                </svg>
-            </button>
-            </div>
+            <div class="px-4 xl:px-0 flex items-center justify-between p-4">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                        <div>
+                        <h1 className="greeting">
+                            <span class="text-3xl text-[#4C220A]">Hello, </span>
+                            <span class="text-[#4C220A] text-3xl font-extrabold">{name}</span>
+                        </h1>
+                        <p class="text-[#4C220A] text-opacity-50">{formattedDate}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <CalendarSearch />
+                </div>
             </div>
 
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-center pt-12 pb-16">
                 <CalendarCarousel />
             </div>
 
+            <div class="pl-6">
+                <div className="bg-[#EDE2D6] rounded-lg shadow-lg w-36 h-40 flex flex-col justify-between 
+                                sm:w-48 sm:h-52 sm:p-4 
+                                md:w-56 md:h-60 
+                                lg:w-60 lg:h-64 lg:p-4">
+                    <h1 className="text-sm font-semibold text-amber-950 text-start 
+                                    sm:text-md 
+                                    md:text-lg 
+                                    lg:text-lg">Calories
+                    </h1>
+                    <div className="relative flex flex-grow justify-center items-center w-full h-full">
+                        <svg className="w-full h-full max-w-full" viewBox="0 0 190 190">
+                        <circle className="progress-ring__circle"
+                                stroke="white"
+                                strokeWidth="6" 
+                                fill="transparent"
+                                r="85" 
+                                cx="95" cy="95"/>
+                        </svg>
+                        <div className="absolute flex flex-col items-center justify-center inset-0">
+                            <span className="text-md font-bold text-amber-950 
+                                            sm:text-lg 
+                                            md:text-xl 
+                                            lg:text-2xl">720</span>
+                            <span className="text-xs text-amber-950 
+                                            sm:text-sm 
+                                            md:text-sm 
+                                            lg:text-sm">Kcal Left</span>
+                        </div>
+                    </div>
 
-
-        <div class="bg-orange-100 rounded-lg shadow-lg w-60 h-64 flex flex-col justify-between p-2">
-        <h1 class="text-lg font-semibold text-amber-950 text-start">Calories</h1>
-        <div class="relative flex flex-grow justify-center items-center w-full h-full">
-            <svg class="progress-ring w-50 h-42" width="150" height="150">
-                <circle class="progress-ring__circle"
-                        stroke="white"
-                        stroke-width="4"
-                        fill="transparent"
-                        r="90"
-                        cx="64"
-                        cy="64"/>
-                <circle class="progress-ring__circle"
-                        stroke="blue"
-                        stroke-width="4"
-                        stroke-dasharray="326.725" /* Circumference */
-                        stroke-dashoffset="326.725" /* Adjust this value */
-                        fill="transparent"
-                        r="52"
-                        cx="64"
-                        cy="64"/>
-            </svg>
-            <div class="absolute flex flex-col items-center justify-center">
-                <span class="text-2xl text-amber-950 font-bold">720</span>
-                <span class="block text-amber-950 text-sm">Kcal Left</span>
+                </div>
             </div>
-        </div>
-        </div> 
 
-        <h1 class="text-lg font-semibold text-amber-950 text-start">Activity</h1>
+            <h1 class="text-2xl font-semibold text-amber-950 text-start pl-6 pt-12 pb-12">Activity</h1>
 
-        <div>
-            <Food foodName="Eggs" mealType="Breakfast" quantity={4} kcals={320}/>
-        </div>
-        
+            <div class="pl-6">
+                <Food foodName="Eggs" mealType="Breakfast" quantity={4} kcals={320}/>
+            </div>      
 
         </div>
 

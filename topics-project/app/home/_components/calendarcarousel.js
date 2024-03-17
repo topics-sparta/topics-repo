@@ -17,7 +17,7 @@ export const CalendarCarousel = () => {
     const isSelected = isSameDay(date, selectedDate);
     const isPastOrToday = isClickable(date);
 
-    let baseStyle = "flex justify-center items-center w-12 h-16 "; // Adjusted for a skinnier oval
+    let baseStyle = "flex justify-center items-center w-12 h-16 "; 
     let textStyle = "text-sm";
     let bgColor = isSelected ? "bg-[#D79C59]" : "bg-transparent";
     let textColor = isSelected ? "text-white" : (isPastOrToday ? "text-black" : "text-gray-400");
@@ -39,8 +39,10 @@ export const CalendarCarousel = () => {
   };
 
   return (
-    <div className="flex space-x-1 my-4"> 
-      {dates.map(renderDateBlock)}
+    <div className="lg:max-w-screen-xl mx-auto px-4 xl:px-0">
+      <div className="flex my-4 space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 xl:space-x-20">
+        {dates.map(renderDateBlock)}
+      </div>
     </div>
   );
 };
