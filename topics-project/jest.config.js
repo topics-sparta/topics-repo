@@ -10,6 +10,15 @@ const createJestConfig = nextJest({
 const config = {
   coverageProvider: 'v8',
   testEnvironment: 'node',
+  collectCoverageFrom: [
+    'app/**/*.{js,jsx,ts,tsx}', // Test the client components and pages code
+    'src/**/*.{js,jsx,ts,tsx}', // Test the src folder files
+    '!src/**/*.test.{js,jsx,ts,tsx}', // Exclude test files
+    '!src/**/*.d.ts', // Exclude TypeScript declaration files
+    '!src/**/_app.{js,jsx,ts,tsx}', // Exclude Next.js specific files like _app and _document if needed
+    '!src/**/_document.{js,jsx,ts,tsx}',
+    // Add any other files or directories you wish to exclude
+  ],
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 }
