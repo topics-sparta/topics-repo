@@ -1,5 +1,8 @@
 "use client";
 import { useState } from "react";
+import { Food } from './_components/food';
+import { CalendarCarousel } from './_components/calendarcarousel';
+
 
 export default function HomePage() {
 
@@ -26,31 +29,11 @@ export default function HomePage() {
             </div>
             </div>
 
-            <div class="flex justify-center items-center mt-4 p-4">
-                <div class="flex space-x-4">
-                <div class="text-center">
-                    <div class="text-sm font-medium text-gray-500">Fri</div>
-                    <div class="text-lg font-medium">7</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-sm font-medium text-gray-500">Sat</div>
-                    <div class="text-lg font-medium">8</div>
-                </div>
-
-                <div class="text-center">
-                    <div class="text-sm font-medium text-gray-500">Sun</div>
-                    <div class="text-lg font-medium">9</div>
-                </div>
-                <div class="text-center rounded-full bg-orange-200">
-                    <div class="text-sm font-medium text-gray-500">Mon</div>
-                    <div class="text-lg font-medium text-white bg-orange-500 rounded-full w-10 h-10 flex items-center justify-center">10</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-sm font-medium text-gray-500">Tue</div>
-                    <div class="text-lg font-medium">11</div>
-                </div>
-                </div>
+            <div class="flex items-center justify-center">
+                <CalendarCarousel />
             </div>
+
+
 
         <div class="bg-orange-100 rounded-lg shadow-lg w-60 h-64 flex flex-col justify-between p-2">
         <h1 class="text-lg font-semibold text-amber-950 text-start">Calories</h1>
@@ -82,6 +65,10 @@ export default function HomePage() {
 
         <h1 class="text-lg font-semibold text-amber-950 text-start">Activity</h1>
 
+        <div>
+            <Food foodName="Eggs" mealType="Breakfast" quantity={4} kcals={320}/>
+        </div>
+        
 
         </div>
 
