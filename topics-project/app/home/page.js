@@ -1,15 +1,17 @@
 "use client";
-import { useState } from "react";
 import { Food } from './_components/food';
 import { CalendarCarousel } from './_components/calendarcarousel';
 import { CalendarSearch } from 'lucide-react';
+import { useFetchCalories } from './action'
 
 
 export default function HomePage() {
-    {/* Make mobile responsive and correct position for desktop*/}
+    {/* Issue with full sized screen, white space on both corners and bottom, whitespace always present after food card (needs addressing) */}
     {/* take array / storage from action . js and map to the food component (adjust UI of food component as well) */}
 
     const name = "Johan";
+    const userID = '3523a764-3925-4f8a-bdac-0436313a2be6'
+    const { calories, loading, error } = useFetchCalories(userID);
 
     function getFormattedDate() {
         const daysOfWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
@@ -74,7 +76,7 @@ export default function HomePage() {
                             <span className="text-md font-bold text-amber-950 
                                             sm:text-lg 
                                             md:text-xl 
-                                            lg:text-2xl">720</span>
+                                            lg:text-2xl">{calories}</span>
                             <span className="text-xs text-amber-950 
                                             sm:text-sm 
                                             md:text-sm 

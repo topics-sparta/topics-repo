@@ -1,4 +1,4 @@
-
+{/* Make mobile responsive and correct design based on figma*/}
 export const Food = ({ foodName, mealType, quantity, kcals }) => {
     return (
       <div className="flex flex-col bg-[#D79C59] rounded-lg shadow-lg overflow-hidden w-64" >
