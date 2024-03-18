@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createClient } from "/src/utils/supabase/server";
+import { createClient } from "../../src/utils/supabase/server";
 
 export async function signup(formData) {
   const supabase = createClient();
@@ -25,9 +25,12 @@ export async function signup(formData) {
     if (error) {
       throw error;
     }
-    redirect("/");
+    const { data: { user } } = await supabase.auth.getUser();
+    console.log(user)
+    return user;
 
   } catch (error) {
+    console.log(error);
     redirect("/error");
   }
 }

@@ -33,9 +33,16 @@ export default function SignupPage() {
     setShowNext(!showNext);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signup(formData);
+    try {
+      const user = await signup(formData);
+      if (user)
+        window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+      window.location.href = "/error";
+    }
   }
 
   return (
