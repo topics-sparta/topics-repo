@@ -22,9 +22,9 @@ export const Hero = () => {
                     </Link>
                 </div>
                 <div className="col-span-1 relative w-full overflow-hidden">
-                    <figure className="absolute left-[60px] sm:left-[120px] h-[200px] w-[265px] rounded-md sm:w-[465px] sm:h-[350px]"><Image className="rounded-sm" fill src={desktopView} /></figure>
+                    <figure className="absolute left-[60px] sm:left-[120px] h-[200px] w-[265px] rounded-md sm:w-[465px] sm:h-[350px]"><Image className="rounded-sm" fill src={desktopView} alt="image of desktop version of app" /></figure>
                     <figure className="relative z-10 mt-6 sm:mt-12 h-[175px] w-[82px] sm:h-[300px] sm:w-[140px]">
-                        <Image fill src={mobileView} />
+                        <Image fill src={mobileView} alt="image of mobile version of app" />
                     </figure>
                 </div>
             </div>
