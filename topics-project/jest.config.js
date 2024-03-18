@@ -10,6 +10,7 @@ const createJestConfig = nextJest({
 const config = {
   coverageProvider: 'v8',
   testEnvironment: 'node',
+  testPathIgnorePatterns: ['<rootDir>/__e2e__/'],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}', // Test the client components and pages code
     'src/**/*.{js,jsx,ts,tsx}', // Test the src folder files
