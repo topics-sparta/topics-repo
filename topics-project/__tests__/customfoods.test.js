@@ -1,3 +1,4 @@
+/** @jest-environment jsdom */
 import React from 'react';
 import { render, fireEvent, waitFor, screen, getByLabelText } from '@testing-library/react';
 import '@testing-library/jest-dom';

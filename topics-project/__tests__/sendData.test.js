@@ -86,6 +86,35 @@ describe('sendData function', () => {
     expect(errorSpy).toHaveBeenCalled();
     expect(errorSpy).toHaveBeenCalledWith('Error: Protein must be a positive number.'); // expects for proiten error 
   });
+  it('logs an error when fat is a string', async () => {
+    const incorrectFormData = {
+      food_name: 'Test_Food',
+      calories: 120,
+      protein: 20,
+      fat: 'Not a number',
+      carbs: 25,
+    };
+
+    await sendData(incorrectFormData);
+
+    expect(errorSpy).toHaveBeenCalled();
+    expect(errorSpy).toHaveBeenCalledWith('Error: Fat must be a positive number.'); // expects for proiten error 
+  });
+
+  it('logs an error when carbs is a string', async () => {
+    const incorrectFormData = {
+      food_name: 'Test_Food',
+      calories: 120,
+      protein: 10,
+      fat: 0,
+      carbs: 'Not a number',
+    };
+
+    await sendData(incorrectFormData);
+
+    expect(errorSpy).toHaveBeenCalled();
+    expect(errorSpy).toHaveBeenCalledWith('Error: Carbs must be a positive number.'); // expects for proiten error 
+  });
 
   
 });
