@@ -41,6 +41,7 @@ describe("Sign-in form", () => {
     await user.type(emailField, "test@gmail.com");
     expect(emailField).toBeValid();
   });
+  // Integration Tests are the two below
   it("Form resets after success", async () => {
     render(<LoginPage />);
 
@@ -85,7 +86,6 @@ describe("Sign-in form", () => {
       password: "wrongpass",
     });
 
-    // Assuming your UI shows an error message in a specific element when login fails
     const errorTag = await screen.findByText("Invalid credentials");
     expect(errorTag).toBeInTheDocument();
     expect(emailField.value).toBe("wrong@example.com");
