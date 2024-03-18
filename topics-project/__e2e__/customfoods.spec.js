@@ -7,7 +7,7 @@ test('submitting custom food form', async ({ page }) => {
   // Capture console messages
   const consoleMessages = [];
   page.on('console', msg => {
-    consoleMessages.push(msg);
+    consoleMessages.push(msg); // Push the text content of the message
   });
 
   // Fill out the form fields with valid data
@@ -20,9 +20,14 @@ test('submitting custom food form', async ({ page }) => {
   // Submit the form
   await page.click('button[type="submit"]');
 
-  // Wait for the success message to appear in the console
-  await page.waitForFunction(() => {
-    return consoleMessages.some(msg => msg.text().includes('Form submitted successfully'));
+  await page.waitForSelector('.success-alert'); // Adjust the selector if needed
+
+  // Get the text content of the success alert
+  const alertText = await page.evaluate(() => {
+    const alertElement = document.querySelector('.success-alert'); // Adjust the selector if needed
+    return alertElement ? alertElement.innerText : null;
   });
 
+  // Verify the alert content
+  expect(alertText).toContain('Form submitted successfully');
 });
