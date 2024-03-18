@@ -5,8 +5,11 @@ import { useState } from "react";
 
 
 
-export default function CustomFoodForm() {
-  // states for out forms
+export default function CustomFoodForm() { 
+  // states for our forms
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
   const [formData, setFormData] = useState({
     food_name: '',
     calories: '',
@@ -22,6 +25,7 @@ export default function CustomFoodForm() {
 
   // hand our form submission
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
 
       // if our forms have empty values change them to 0s
@@ -42,8 +46,15 @@ export default function CustomFoodForm() {
         fat: '',
         carbs: ''
       });
+      setErrorMessage(''); // Clear any previous error message
+      setSuccessMessage('Form submitted successfully');
+      console.log('Form submitted successfully')
+     // alert('Form submitted successfully');
+
     } catch (error) {
-      console.error("Error submitting form: ", error);
+      // Set the error message if sendData fails
+      setErrorMessage(error.message || 'Failed to add food');
+      console.error(error);
     }
   };
 
@@ -52,7 +63,7 @@ export default function CustomFoodForm() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#FFF7ED] px-4 sm:px-6"> {/* Responsive padding */}
       <div className="p-4 sm:p-8 w-full max-w-md"> {/* Responsive padding and width */}
         <h1 className="text-[#4C220A] text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">Add Custom Food</h1> {/* Responsive text size */}
-        <form  className="flex flex-col space-y-4">
+        <form  className="flex flex-col space-y-4" onSubmit={handleSubmit}>
         <label className="text-[18px] text-[#4C220A]" htmlFor="food_name">Food Name:</label>
         <input
         className="border-2 border-[#4C220A] p-2 rounded"
@@ -109,8 +120,9 @@ export default function CustomFoodForm() {
         onChange={handleChange}
         type="number"
       />
-    <button className="bg-[#D79C59] text-[#FFF7ED] py-2 px-4 sm:py-3 sm:px-6 rounded font-semibold mt-4" formAction={handleSubmit}>ADD FOOD</button>
-
+    <button className="bg-[#D79C59] text-[#FFF7ED] py-2 px-4 sm:py-3 sm:px-6 rounded font-semibold mt-4" type="submit">ADD FOOD</button>
+    {errorMessage && <p>{errorMessage}</p>} 
+    {successMessage && <p className="success-alert text-green-600">{successMessage}</p>}
     </form>
     </div>
     </div>
