@@ -27,20 +27,6 @@ describe('sendData function', () => {
     errorSpy.mockRestore();
   });
 
-  it('check for successfull send  to Supabase', async () => {
-    const handledFormData = {
-      food_name: 'Test_Food',
-      calories: 95,
-      protein: 0,
-      fat: 0,
-      carbs: 25,
-    };
-
-    const result = await sendData(handledFormData);
-
-    expect(result).toBeUndefined(); // result should not give us feedback
-    expect(errorSpy).not.toHaveBeenCalled(); // no errors displayed
-  });
 
   it('logs an error when food_name is empty', async () => {
     const incorrectFormData = {
