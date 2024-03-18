@@ -6,7 +6,9 @@ import { useState } from "react";
 
 
 export default function CustomFoodForm() {
-  // states for out forms
+  // states for our forms
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [formData, setFormData] = useState({
     food_name: '',
     calories: '',
@@ -42,8 +44,11 @@ export default function CustomFoodForm() {
         fat: '',
         carbs: ''
       });
+      setErrorMessage(''); // Clear any previous error message
     } catch (error) {
-      console.error("Error submitting form: ", error);
+      // Set the error message if sendData fails
+      setErrorMessage(error.message || 'Failed to add food');
+      console.error(error);
     }
   };
 
@@ -110,7 +115,7 @@ export default function CustomFoodForm() {
         type="number"
       />
     <button className="bg-[#D79C59] text-[#FFF7ED] py-2 px-4 sm:py-3 sm:px-6 rounded font-semibold mt-4" type="submit">ADD FOOD</button>
-
+    {errorMessage && <p>{errorMessage}</p>} 
     </form>
     </div>
     </div>
