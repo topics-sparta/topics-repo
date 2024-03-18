@@ -6,8 +6,10 @@ import { useState } from "react";
 
 
 export default function CustomFoodForm() {
+  
   // states for our forms
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const [formData, setFormData] = useState({
     food_name: '',
@@ -18,12 +20,14 @@ export default function CustomFoodForm() {
   })
   // handle typing
   const handleChange = (e) => {
+   
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   // hand our form submission
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
 
       // if our forms have empty values change them to 0s
@@ -45,6 +49,10 @@ export default function CustomFoodForm() {
         carbs: ''
       });
       setErrorMessage(''); // Clear any previous error message
+      setSuccessMessage('Form submitted successfully');
+      console.log('Form submitted successfully')
+     // alert('Form submitted successfully');
+
     } catch (error) {
       // Set the error message if sendData fails
       setErrorMessage(error.message || 'Failed to add food');
@@ -116,6 +124,7 @@ export default function CustomFoodForm() {
       />
     <button className="bg-[#D79C59] text-[#FFF7ED] py-2 px-4 sm:py-3 sm:px-6 rounded font-semibold mt-4" type="submit">ADD FOOD</button>
     {errorMessage && <p>{errorMessage}</p>} 
+    {successMessage && <p className="success-alert text-green-600">{successMessage}</p>}
     </form>
     </div>
     </div>

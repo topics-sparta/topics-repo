@@ -5,26 +5,29 @@ const supabase = createClient();
 
   // takes our handled form and sends it to SB using a hard coded uuid for now 
 export async function sendData(handledformData) {
+  
   if (!handledformData.food_name) {
     console.error("Error: Food name is required.");
-    return { error: new Error("Food name is required.") };
+    return { errorMessage: "Food name is required." };
   }
-  if (typeof handledformData.calories !== 'number' || handledformData.calories <= 0) {
+  if (typeof handledformData.calories !== 'number' || handledformData.calories < 0) {
     console.error("Error: Calories must be a positive number.");
-    return { error: new Error("Calories must be a positive number.") };
+    return { errorMessage: "Calories must be a positive number." };
   }
-  if (typeof handledformData.protein !== 'number' || handledformData.calories <= 0) {
+  if (typeof handledformData.protein !== 'number' || handledformData.protein < 0) {
     console.error("Error: Protein must be a positive number.");
-    return { error: new Error("Protein must be a positive number.") };
+    return { errorMessage: "Protein must be a positive number." };
   }
-  if (typeof handledformData.fat !== 'number' || handledformData.calories <= 0) {
+  if (typeof handledformData.fat !== 'number' || handledformData.fat < 0) {
     console.error("Error: Fat must be a positive number.");
-    return { error: new Error("Fat must be a positive number.") };
+    return { errorMessage: "Fat must be a positive number." };
   }
-  if (typeof handledformData.carbs !== 'number' || handledformData.calories <= 0) {
+  if (typeof handledformData.carbs !== 'number' || handledformData.carbs < 0) {
     console.error("Error: Carbs must be a positive number.");
-    return { error: new Error("Carbs must be a positive number.") };
+    return { errorMessage: "Carbs must be a positive number." };
+    
   }
+  
     try {
       const { error } = await supabase
       .from("nutrition_log")
