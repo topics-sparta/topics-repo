@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { format, addDays, isBefore, isSameDay, startOfToday } from 'date-fns';
+import clsx from 'clsx';
 
 export const CalendarCarousel = () => {
   const [selectedDate, setSelectedDate] = useState(startOfToday());
@@ -17,20 +18,13 @@ export const CalendarCarousel = () => {
     const isSelected = isSameDay(date, selectedDate);
     const isPastOrToday = isClickable(date);
 
-    let baseStyle = "flex justify-center items-center w-12 h-16 "; 
-    let textStyle = "text-sm";
-    let bgColor = isSelected ? "bg-[#D79C59]" : "bg-transparent";
-    let textColor = isSelected ? "text-white" : (isPastOrToday ? "text-black" : "text-gray-400");
-    let cursorStyle = isPastOrToday ? "cursor-pointer" : "cursor-default";
-    let shapeStyle = isSelected ? "rounded-full" : "rounded-lg";
-
     return (
       <div
         key={date.toString()}
-        className={`${baseStyle} ${shapeStyle} ${bgColor} ${textColor} ${cursorStyle}`}
+        className={clsx('flex justify-center items-center w-12 h-16', isSelected ? 'bg-[#D79C59] rounded-full text-white' : clsx('bg-transparent rounded-lg', isPastOrToday ? 'text-black cursor-pointer' : 'text-gray-400 cursor-default'))}
         onClick={() => !isSelected && isPastOrToday && setSelectedDate(date)}
       >
-        <div>
+        <div className='flex flex-col justify-center items-center'>
           <div className="font-semibold">{format(date, 'EEE')}</div>
           <div className="font-bold">{format(date, 'd')}</div>
         </div>
@@ -39,8 +33,8 @@ export const CalendarCarousel = () => {
   };
 
   return (
-    <div className="lg:max-w-screen-xl mx-auto px-4 xl:px-0">
-      <div className="flex my-4 space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 xl:space-x-20">
+    <div className="max-w-full w-full lg:w-8/12 lg:mx-auto">
+      <div className="w-full grid grid-cols-7">
         {dates.map(renderDateBlock)}
       </div>
     </div>
