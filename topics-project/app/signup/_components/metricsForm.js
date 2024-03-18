@@ -66,7 +66,7 @@ export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
           </div>
         </div>
 
-        <label className="text-2xl font-bold">Goal</label>
+        <label className="text-2xl font-bold" htmlFor="goal">Goal</label>
         <select
           className="w-[170px] border-2 border-[#4C220A] p-2 rounded-sm mb-5 mr-2 cursor-pointer"
           id="goal"
