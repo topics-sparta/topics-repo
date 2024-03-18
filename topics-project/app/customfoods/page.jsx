@@ -20,7 +20,8 @@ export default function CustomFoodForm() {
   // handle typing
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const isNumeric = ['calories', 'protein', 'fat', 'carbs'].includes(name);
+  setFormData({ ...formData, [name]: isNumeric ? parseFloat(value) || 0 : value });
   };
 
   // hand our form submission
