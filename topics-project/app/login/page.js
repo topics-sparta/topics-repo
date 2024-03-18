@@ -1,50 +1,44 @@
 "use client";
 
 import { login } from "./actions";
-import { useFormStatus, useFormState } from "react-dom";
 import { Loader, BadgeAlert, BadgeCheck } from "lucide-react";
-import { useEffect, useRef } from "react";
-import {
-  Alert,
-  AlertTitle,
-} from "../../@/components/alert";
-
-export function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button
-      className="w-full rounded-md h-14 mt-4 bg-customSecondary hover:bg-customAccent transition-colors duration-300 flex justify-center items-center"
-      disabled={pending}
-    >
-      <p className="text-xl font-poppins font-bold text-customPrimary">
-        {pending ? <Loader className="w-4 h-4 animate-spin" /> : "LOGIN"}
-      </p>
-    </button>
-  );
-}
+import { useEffect, useRef, useState } from "react";
+import { Alert, AlertTitle } from "../../@/components/alert";
 
 export default function LoginPage() {
-  const [formState, formAction] = useFormState(login, {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState({
     message: "",
-    errors: undefined,
-    fieldValues: {
-      email: "",
-      password: "",
-    },
+    error: null,
   });
 
   const formRef = useRef(null);
 
   useEffect(() => {
-    if (formState.message === "success") {
+    if (submitResult.message === "success") {
       formRef.current?.reset();
       // TO DO: Add routing to dashboard when route is created
     }
-  }, [formState]);
+  }, [submitResult]);
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+      const result = await login({ email, password });
+      setSubmitResult(result);
+      // TO DO: navigate to dashboard (when its created)
+    } catch (error) {
+      setSubmitResult({ message: "error", error: "Something went wrong!" });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="w-full bg-customPrimary min-h-[calc(100vh-64px)] relative">
-      {formState.message === "success" ? (
+      {submitResult.message === "success" ? (
         <div className="absolute top-0 left-0 right-0 mx-auto max-w-60 font-redHatText animate-fade-down animate-duration-300 animate-ease-in-out">
           <Alert className="rounded-md border-transparent bg-green-400 text-white flex items-center justify-center gap-2">
             <BadgeCheck className="h-4 w-4" color="white" />
@@ -52,11 +46,11 @@ export default function LoginPage() {
           </Alert>
         </div>
       ) : (
-        formState.message === "error" && (
+        submitResult.message === "error" && (
           <div className="absolute top-0 left-0 right-0 mx-auto max-w-60 font-redHatText animate-fade-down animate-duration-300 animate-ease-in-out">
             <Alert className="rounded-md border-transparent bg-red-400 text-white flex items-center justify-center gap-2">
               <BadgeAlert className="h-4 w-4" color="white" />
-              <AlertTitle>{formState.errors}</AlertTitle>
+              <AlertTitle>{submitResult.error}</AlertTitle>
             </Alert>
           </div>
         )
@@ -68,7 +62,10 @@ export default function LoginPage() {
         <form
           ref={formRef}
           className="flex flex-col w-full md:w-5/12 gap-4"
-          action={formAction}
+          onSubmit={(e) => {
+            e.preventDefault(); // Prevent default form submission
+            handleSubmit();
+          }}
         >
           <div className="flex flex-col gap-4">
             <label
@@ -83,6 +80,7 @@ export default function LoginPage() {
               id="email"
               name="email"
               type="email"
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -99,11 +97,24 @@ export default function LoginPage() {
               id="password"
               name="password"
               type="password"
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
           <div className="flex flex-col gap-2 items-center">
-            <SubmitButton />
+            <button
+              className="w-full rounded-md h-14 mt-4 bg-customSecondary hover:bg-customAccent transition-colors duration-300 flex justify-center items-center"
+              disabled={isSubmitting}
+              type="submit"
+            >
+              <p className="text-xl font-poppins font-bold text-customPrimary">
+                {isSubmitting ? (
+                  <Loader className="w-4 h-4 animate-spin" />
+                ) : (
+                  "LOGIN"
+                )}
+              </p>
+            </button>
             {/* TO DO: Add Routing to sign in page to span */}
             <p className="text-sm font-redHatText font-medium text-customAccent/40">
               Dont have an account?{" "}
