@@ -4,6 +4,7 @@ on:
         branches: [main]
     pull_request:
         branches: [main]
+    workflow_dispatch:
 
 jobs:
   build:
@@ -20,3 +21,11 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  tests:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run unit and integration tests
+        run: npm run tests
+        
