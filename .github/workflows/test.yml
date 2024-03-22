@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 20.2.0
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
       - name: Run Tests
         run: npm run tests
   build:
