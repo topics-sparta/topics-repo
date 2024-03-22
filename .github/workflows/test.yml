@@ -45,7 +45,7 @@ jobs:
       run: npm run test --prefix topics-project -- --coverage
 
     - name: Launch Application
-      run: npm run start --prefix topics-project
+      run: npm run start --prefix topics-project &
 
     - name: Run e2e Tests
       run: npx playwright test --prefix topics-project
