@@ -4,6 +4,7 @@ on:
         branches: [main]
     pull_request:
         branches: [main]
+    workflow_dispatch:
 
 jobs:
   build:
@@ -20,3 +21,19 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 20.2.0
+        
+    - name: Install Dependencies
+      run: npm i --prefix topics-project
+      
+    - name: Run unit and integration tests
+      run: npm run test --prefix topics-project
