@@ -36,8 +36,8 @@ jobs:
           node-version: 20.2.0
       - name: Install Dependencies
         run: npm install
-      - name: Run localhost
-        run: npm run dev
+      - name: install playwright browsers
+        run: npx playwright install --with-deps
       - name: Run Tests
         run: npx playwright test
   build:
