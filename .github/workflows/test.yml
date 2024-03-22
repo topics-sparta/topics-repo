@@ -21,7 +21,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Run Tests
-        run: npm run tests
+        run: npm test
   build:
     runs-on: ubuntu-latest
     steps:
