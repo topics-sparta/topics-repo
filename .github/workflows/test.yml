@@ -39,6 +39,9 @@ jobs:
       - name: install playwright browsers
         run: npx playwright install --with-deps
       - name: Run Tests
+        env:
+            SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+            SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: npx playwright test
   build:
     runs-on: ubuntu-latest
