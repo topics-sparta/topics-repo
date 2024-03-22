@@ -39,7 +39,7 @@ jobs:
       run: npm run test --prefix topics-project
 
     - name: Generate Code Coverage Report
-      run: npm run test -- --coverage --prefix topics-project
+      run: npm run test --prefix topics-project -- --coverage
 
     - name: Launch Application
       run: npm run start --prefix topics-project
