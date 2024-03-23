@@ -51,5 +51,8 @@ jobs:
       run: npm run start --prefix topics-project &
 
     - name: Run e2e Tests
+      env:
+        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
       working-directory: topics-project
       run: npx playwright test
