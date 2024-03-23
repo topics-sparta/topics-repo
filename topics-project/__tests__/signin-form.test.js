@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import LoginPage from "../app/login/page";
 import { createClient } from "../src/utils/supabase/client";
-import { login } from "../app/login/actions"; // Adjust the import path to where your login function is
+import { login } from "../app/login/actions";
 
 jest.mock("../src/utils/supabase/client", () => ({
   createClient: jest.fn().mockReturnValue({
@@ -15,7 +15,7 @@ jest.mock("../src/utils/supabase/client", () => ({
 }));
 
 jest.mock("../app/login/actions", () => ({
-  login: jest.fn().mockResolvedValue({ message: "success", error: null }), // Mock your login function
+  login: jest.fn().mockResolvedValue({ message: "success", error: null }), // Mock login function
 }));
 
 describe("Sign-in form", () => {
@@ -75,7 +75,6 @@ describe("Sign-in form", () => {
     const passwordField = screen.getByPlaceholderText("Enter password");
     const submitButton = screen.getByRole("button", { name: "LOGIN" });
 
-    // Use the "wrong" credentials that trigger an error
     await user.type(emailField, "wrong@example.com");
     await user.type(passwordField, "wrongpass");
 

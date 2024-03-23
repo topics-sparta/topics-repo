@@ -1,7 +1,5 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-import { createClient } from '@supabase/supabase-js';
-
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');

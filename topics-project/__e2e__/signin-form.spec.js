@@ -1,7 +1,6 @@
 // @ts-check
 
 import { test, expect } from '@playwright/test';
-import { createClient } from '@supabase/supabase-js';
 
 test('successfully sign into application', async ({ page }) => {
   await page.goto('http://localhost:3000');
