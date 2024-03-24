@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "/src/utils/supabase/server";
+import { createClient } from "../../src/utils/supabase/server";
 
 export async function login(prevState, formData) {
   const supabase = createClient();
@@ -21,17 +21,17 @@ export async function login(prevState, formData) {
       errors: undefined,
       fieldValues: {
         email: "",
-        password: ""
-      }
-    }
+        password: "",
+      },
+    };
   } catch (error) {
     return {
       message: "error",
       errors: error.message,
       fieldValues: {
         email: data.email,
-        password: data.password
-      }
-    }
+        password: data.password,
+      },
+    };
   }
 }
