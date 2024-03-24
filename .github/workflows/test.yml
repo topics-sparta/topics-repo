@@ -39,6 +39,14 @@ jobs:
           node-version: 20.2.0
       - name: Install Dependencies
         run: npm install
+      - name: Start the Application
+        run: npm start &
+      - name: Wait for the Application to be Ready
+        run: |
+          until curl --output /dev/null --silent --head --fail http://localhost:3000; do
+            echo 'Waiting for application to start...'
+            sleep 5
+          done
       - name: install playwright browsers
         run: npx playwright install --with-deps
       - name: Run Tests
