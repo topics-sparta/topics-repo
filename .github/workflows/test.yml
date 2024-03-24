@@ -39,8 +39,8 @@ jobs:
           node-version: 20.2.0
       - name: Install Dependencies
         run: npm install
-      - name: Start the Application
-        run: npm start &
+      - name: Build Application
+        run: npm run build --prefix topics-project
       - name: Wait for the Application to be Ready
         run: |
           until curl --output /dev/null --silent --head --fail http://localhost:3000; do
