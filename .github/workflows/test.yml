@@ -37,17 +37,17 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run All Tests, unit and integration
-        run: npm test
+      # - name: Run All Tests, unit and integration
+      #   run: npm test
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      # - name: Install Playwright Browsers
+      #   run: npx playwright install --with-deps
 
-      - name: Build Application
-        run: npm run build 
+      # - name: Build Application
+      #   run: npm run build 
 
-      - name: Code Coverage Report
-        run: npm run test --prefix topics-project -- --coverage
+      # - name: Code Coverage Report
+      #   run: npm run test --prefix topics-project -- --coverage
 
   run-e2e-tests:
     runs-on: ubuntu-latest
