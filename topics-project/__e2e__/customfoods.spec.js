@@ -20,14 +20,12 @@ test('submitting custom food form', async ({ page }) => {
   // Submit the form
   await page.click('button[type="submit"]');
 
-  await page.waitForSelector('.success-alert'); // Adjust the selector if needed
-
+  await page.waitForSelector('.success-alert'); 
   // Get the text content of the success alert
   const alertText = await page.evaluate(() => {
-    const alertElement = document.querySelector('.success-alert'); // Adjust the selector if needed
+    const alertElement = document.querySelector('.success-alert'); 
     return alertElement ? alertElement.innerText : null;
   });
 
-  // Verify the alert content
   expect(alertText).toContain('Form submitted successfully');
 });
