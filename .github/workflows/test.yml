@@ -23,32 +23,32 @@ jobs:
   all-tests:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.2.0
-        
-    - name: Install Dependencies
-      run: npm i --prefix topics-project
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.2.0
 
-    - name: Build Application
-      run: npm run build --prefix topics-project
-      
-    - name: Run unit and integration tests
-      run: npm run test --prefix topics-project
+      - name: Install Dependencies
+        run: npm i --prefix topics-project
 
-    - name: Generate Code Coverage Report
-      run: npm run test --prefix topics-project -- --coverage
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
-    - name: Run e2e Tests
-      env:
-        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
-      working-directory: topics-project
-      run: npx playwright test
+      - name: Build Application
+        run: npm run build --prefix topics-project
+
+      - name: Run unit and integration tests
+        run: npm run test --prefix topics-project
+
+      - name: Generate Code Coverage Report
+        run: npm run test --prefix topics-project -- --coverage
+
+      - name: Run e2e Tests
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
+        working-directory: topics-project
+        run: npx playwright test
