@@ -35,10 +35,10 @@ jobs:
           node-version: 20.2.0
 
       - name: Install Dependencies
-        run: npm i 
+        run: npm install
 
       - name: Run All Tests, unit and integration
-          run: npm test
+        run: npm test
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
