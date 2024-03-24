@@ -20,7 +20,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  run-tests:
+  run-unit-test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -49,9 +49,24 @@ jobs:
       - name: Code Coverage Report
         run: npm run test --prefix topics-project -- --coverage
 
-      - name: Run e2e test
+  run-e2e-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./topics-project
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.2.0
+      - name: Install Dependencies
+        run: npm install
+      - name: install playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run Tests
         env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
-        working-directory: topics-project
+            NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
         run: npx playwright test
