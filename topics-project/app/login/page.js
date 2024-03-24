@@ -4,6 +4,7 @@ import { login } from "./actions";
 import { useFormStatus, useFormState } from "react-dom";
 import { Loader, BadgeAlert, BadgeCheck } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useRouter } from 'next/navigation';
 import {
   Alert,
   AlertTitle,
@@ -34,13 +35,17 @@ export default function LoginPage() {
   });
 
   const formRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (formState.message === "success") {
       formRef.current?.reset();
       // TO DO: Add routing to dashboard when route is created
+      setTimeout(() => {
+        router.push('/home');
+      }, 0); // Delay navigation very briefly to ensure the router is ready
     }
-  }, [formState]);
+  }, [formState, router]);
 
   return (
     <div className="w-full bg-customPrimary min-h-[calc(100vh-64px)] relative">
