@@ -19,6 +19,10 @@ const config = {
     '!src/**/_document.{js,jsx,ts,tsx}',
     // Add any other files or directories you wish to exclude
   ],
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "/__e2e__/", // This line ensures Jest ignores the Playwright tests.
+  ],
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 }
