@@ -2,18 +2,17 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import HomePage from '../app/home/page'; // Adjust the import path based on your file structure
-import * as hooks from '../app/home/action'; // Adjust the import path to where your useFetchCalories hook is defined
+import HomePage from '../app/home/page'; 
+import * as hooks from '../app/home/action'; 
 
 // Mock the useFetchCalories hook
 jest.mock('../app/home/action', () => ({
   useFetchCalories: jest.fn(),
 }));
 
-//Integration tests
+//Integration test
 describe('API provides 0 to the component', () => {
   beforeEach(() => {
-    // Before each test, mock the hook to return 0 calories, and no loading or error state
     hooks.useFetchCalories.mockReturnValue({
       calories: 0,
       loading: false,
@@ -31,7 +30,6 @@ describe('API provides 0 to the component', () => {
   });
 
   afterEach(() => {
-    // Clear all mocks after each test
     jest.clearAllMocks();
   });
 });
