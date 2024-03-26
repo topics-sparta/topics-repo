@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 import {
   Alert,
   AlertTitle,
-} from "../../@/components/alert";
+} from "../../../@/components/alert";
 
 export function SubmitButton() {
   const { pending } = useFormStatus();
