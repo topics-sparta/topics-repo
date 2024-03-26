@@ -14,7 +14,7 @@ export const Hero = () => {
                         <p className="text-4xl md:text-6xl text-customPrimary font-bold">Empower your health.</p>
                         <p className="text-4xl md:text-6xl text-customAccent font-bold">Reach your goals.</p>
                     </div>
-                    <Link href="/signup">
+                    <Link href="/signup" className="w-full">
                         <button className="w-full md:w-80 h-14 flex justify-center items-center gap-2 rounded-md bg-customPrimary text-customAccent hover:text-customPrimary hover:bg-customAccent transition-colors duration-300">
                             <p className="font-poppins font-bold text-base md:text-xl">START TODAY</p>
                             <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
