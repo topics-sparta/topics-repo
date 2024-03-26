@@ -9,7 +9,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {/* TO DO: For Desktop Dashboard, switch navbar with side-nav */}
         {children}
       </body>
     </html>
