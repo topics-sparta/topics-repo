@@ -52,7 +52,7 @@ export default function HomePage() {
   const formattedDate = getFormattedDate();
 
   return (
-    <div className="w-full min-h-[calc(100vh-64px)] bg-customPrimary">
+    <div className="w-full min-h-screen bg-customPrimary">
       <div className="lg:max-w-screen-xl mx-auto px-4 xl:px-0 flex flex-col gap-8">
         <div class="flex items-center justify-between mt-4">
           <div class="flex items-center text-customAccent">
