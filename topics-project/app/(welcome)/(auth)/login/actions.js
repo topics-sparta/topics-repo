@@ -1,10 +1,7 @@
 "use server";
-
-import { createClient } from "/src/utils/supabase/server";
+import { supabase } from "@/utils/supabase/clientTwo";
 
 export async function login(prevState, formData) {
-  const supabase = createClient();
-
   // type-casting here for convenience
   // in practice, you should validate your inputs
   const data = {
