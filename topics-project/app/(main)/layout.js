@@ -4,12 +4,15 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Loader } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
+import { useMediaQuery } from "usehooks-ts";
+import clsx from "clsx";
 
 
 export default async function Layout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const supabase = createClient()
   const router = useRouter();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     const checkUser = async () => {
@@ -17,9 +20,9 @@ export default async function Layout({ children }) {
 
       if (error) {
         console.error('Error fetching user:', error.message);
-        router.push('/');
+        router.push('/login');
       } else if (!data.user) {
-        router.push('/');
+        router.push('/login');
       } else {
         setIsLoading(false);
       }
@@ -34,8 +37,8 @@ export default async function Layout({ children }) {
 
   return (
       <div className={"flex w-full h-screen"}>
-        <SideNav />
-        <div className="w-[calc(100vw-176px)]">
+        {isMobile ? <></> : <SideNav />}
+        <div className={clsx(isMobile ? "w-[100vw]" : "w-[calc(100vw-176px)]")}>
             {children}
         </div>
       </div>
