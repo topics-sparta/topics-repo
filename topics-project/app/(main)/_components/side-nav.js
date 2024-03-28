@@ -5,9 +5,9 @@ import { signOut } from "../action";
 export default function SideNav() {
     const router = useRouter();
 
-    const handleSignOut = () => {
-        const result = signOut();
-        if(!result.error) {
+    const handleSignOut = async () => {
+        const result = await signOut();
+        if(result.message === "success") {
             router.push('/')
         }
     }

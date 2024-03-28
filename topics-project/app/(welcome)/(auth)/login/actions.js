@@ -1,9 +1,10 @@
 "use server";
-import { supabase } from "@/utils/supabase/clientTwo";
+import { createClient } from "@/utils/supabase/server";
 
 export async function login(prevState, formData) {
+  const supabase = createClient();
   // type-casting here for convenience
-  // in practice, you should validate your inputs
+  // in practice, you should validate your inputs  
   const data = {
     email: formData.get("email"),
     password: formData.get("password"),
