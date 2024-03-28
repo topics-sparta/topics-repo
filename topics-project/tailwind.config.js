@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   prefix: "",
   theme: {
@@ -23,9 +23,9 @@ module.exports = {
     extend: {
       colors: {
         // Using modern `rgb`, custom colors, docs: https://tailwindcss.com/docs/customizing-colors#using-css-variables
-        customPrimary: 'rgb(var(--primary-color) / <alpha-value>)',
-        customSecondary: 'rgb(var(--secondary-color) / <alpha-value>)',
-        customAccent: 'rgb(var(--accent-color) / <alpha-value>)',
+        customPrimary: "rgb(var(--primary-color) / <alpha-value>)",
+        customSecondary: "rgb(var(--secondary-color) / <alpha-value>)",
+        customAccent: "rgb(var(--accent-color) / <alpha-value>)",
         // Rest is from Shadcn
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -82,5 +82,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require('tailwindcss-animated')],
-}
+  plugins: [require("tailwindcss-animate"), require("tailwindcss-animated")],
+};

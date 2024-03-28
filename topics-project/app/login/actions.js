@@ -16,22 +16,23 @@ export async function login(prevState, formData) {
     if (error) {
       throw error;
     }
+    console.log("actived");
     return {
       message: "success",
       errors: undefined,
       fieldValues: {
         email: "",
-        password: ""
-      }
-    }
+        password: "",
+      },
+    };
   } catch (error) {
     return {
       message: "error",
       errors: error.message,
       fieldValues: {
         email: data.email,
-        password: data.password
-      }
-    }
+        password: data.password,
+      },
+    };
   }
 }
