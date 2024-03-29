@@ -9,29 +9,38 @@ export const Macros = ({ protein, fat, carbs, proteinGoal, fatGoal, carbGoal }) 
       <div className="relative flex flex-col w-full h-full">
         {/* The idea here is going to be we grab the users info and we will put min 0, max their targets, value current  */}
         {/*Protein Slider */}
-        <input
-          className="appearance-none bg-customAccent rounded-full h-19"
-          type="range"
-          min="0"
-          max={proteinGoal}
-          value={protein}
-        />
+        <div>
+          <h1>Protein: {protein}/{proteinGoal}</h1>
+          <input
+            className="appearance-none bg-customAccent rounded-full h-19"
+            type="range"
+            min="0"
+            max={proteinGoal}
+            value={protein}
+          />
+        </div>
         {/*Fat Slider */}
-        <input
-          className="appearance-none bg-customAccent rounded-full"
-          type="range"
-          min="0"
-          max={fatGoal}
-          value={fat}
-        />
+        <div>
+        <h1>Fat: {fat}/{fatGoal}</h1>
+          <input
+            className="appearance-none bg-customAccent rounded-full"
+            type="range"
+            min="0"
+            max={fatGoal}
+            value={fat}
+          />
+        </div>
         {/*Carbs Slider */}
-        <input
-          className="appearance-none bg-customAccent rounded-full"
-          type="range"
-          min="0"
-          max={carbGoal}
-          value={carbs}
-        />
+        <div>
+        <h1>Fat: {carbs}/{carbGoal}</h1>
+          <input
+            className="appearance-none bg-customAccent rounded-full"
+            type="range"
+            min="0"
+            max={carbGoal}
+            value={carbs}
+          />
+        </div>
       </div>
     </div>
   );
