@@ -2,7 +2,7 @@
 import { Food } from "./_components/food";
 import { CalendarCarousel } from "./_components/calendarcarousel";
 import { CalendarSearch } from "lucide-react";
-import { useFetchMetrics } from "./action";
+import { useFetchMetrics, useFetchUserInfo } from "./action";
 import Macros from "./_components/macros";
 export default function HomePage() {
   {
@@ -15,6 +15,7 @@ export default function HomePage() {
   const name = "Johan";
   const userID = "65567f92-7a4e-4d12-b1dc-1c4e2dd7343f";
   const { calories, fat, carbs, protein, loading, error } = useFetchMetrics(userID);
+  const { proteinGoal, fatGoal, carbsGoal } = useFetchUserInfo(userID);
 
   function getFormattedDate() {
     const daysOfWeek = [
@@ -115,7 +116,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Macros protein={protein} fat={fat} carbs= {carbs}/>
+          <Macros protein={protein} fat={fat} carbs={carbs} proteinGoal={proteinGoal} fatGoal={fatGoal} carbGoal={carbsGoal}/>
         </div>
         <div class="flex flex-col gap-4">
           <h1 class="text-2xl font-semibold text-amber-950 text-start">

@@ -1,5 +1,5 @@
-export const Macros = ({ protein, fat, carbs }) => {
-  console.log("in macros",protein,fat,carbs)
+export const Macros = ({ protein, fat, carbs, proteinGoal, fatGoal, carbGoal }) => {
+  console.log("in macros",protein,fat,carbs, proteinGoal, fatGoal, carbGoal)
   return (
     <div className="bg-customAccent/10 rounded-lg shadow-lg w-6/12 h-200 p-2 max-w-52 flex flex-col justify-between">
       <h1 className="text-base font-semibold font-poppins text-customAccent text-start md:text-lg">
@@ -13,7 +13,7 @@ export const Macros = ({ protein, fat, carbs }) => {
           className="appearance-none bg-customAccent rounded-full h-19"
           type="range"
           min="0"
-          max="50"
+          max={proteinGoal}
           value={protein}
         />
         {/*Fat Slider */}
@@ -21,7 +21,7 @@ export const Macros = ({ protein, fat, carbs }) => {
           className="appearance-none bg-customAccent rounded-full"
           type="range"
           min="0"
-          max="50"
+          max={fatGoal}
           value={fat}
         />
         {/*Carbs Slider */}
@@ -29,7 +29,7 @@ export const Macros = ({ protein, fat, carbs }) => {
           className="appearance-none bg-customAccent rounded-full"
           type="range"
           min="0"
-          max="50"
+          max={carbGoal}
           value={carbs}
         />
       </div>
