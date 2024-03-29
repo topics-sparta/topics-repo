@@ -54,7 +54,6 @@ export default function HomePage() {
 
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-customPrimary">
-      <MyBarcodeScanner />
       <div className="lg:max-w-screen-xl mx-auto px-4 xl:px-0 flex flex-col gap-8">
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center text-customAccent">
