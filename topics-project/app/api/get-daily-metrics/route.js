@@ -17,7 +17,7 @@ export async function GET(request) {
   if (error)
     return new Response(JSON.stringify({ "error": error.message }), { status: 500 });
   else
-    return new Response(JSON.stringify({ "calories": getTotalCalories(data),"fat":getTotalFat(data), "protein":getTotalProtein(data), "carbs":getTotalCarbs(data) }), { status: 200 });
+    return new Response(JSON.stringify({ "calories": getTotalMetric(data, 'calories'),"fat": getTotalMetric(data, 'fat'), "protein":getTotalMetric(data, 'protein'), "carbs":getTotalMetric(data, 'carbs') }), { status: 200 });
 }
 
 function getUTCDate() {
@@ -26,31 +26,10 @@ function getUTCDate() {
   currentDate.setHours(0, 0, 0, 0);
   return currentDate.toISOString();
 }
-function getTotalCalories(data) {
-  let totalCalories = 0;
+function getTotalMetric(data, metric) {
+  let totalMetric = 0;
   data.forEach(entry => {
-    totalCalories += entry.calories;
+    totalMetric += entry[metric];
   });
-  return totalCalories;
-}
-function getTotalFat(data) {
-  let totalFat = 0;
-  data.forEach(entry => {
-    totalFat += entry.fat;
-  });
-  return totalFat;
-}
-function getTotalProtein(data) {
-  let totalProtein = 0;
-  data.forEach(entry => {
-    totalProtein += entry.protein;
-  });
-  return totalProtein;
-}
-function getTotalCarbs(data) {
-  let totalCarbs = 0;
-  data.forEach(entry => {
-    totalCarbs += entry.carbs;
-  });
-  return totalCarbs;
+  return totalMetric;
 }

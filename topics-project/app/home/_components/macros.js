@@ -1,5 +1,4 @@
 export const Macros = ({ protein, fat, carbs, proteinGoal, fatGoal, carbGoal }) => {
-  console.log("in macros",protein,fat,carbs, proteinGoal, fatGoal, carbGoal)
   return (
     <div className="bg-customAccent/10 rounded-lg shadow-lg w-6/12 h-200 p-2 max-w-52 flex flex-col justify-between">
       <h1 className="text-base font-semibold font-poppins text-customAccent text-start md:text-lg">
