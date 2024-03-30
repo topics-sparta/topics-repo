@@ -11,7 +11,7 @@ export default function AddFoodPage() {
         <div className='flex justify-center pt-12'>
           <SearchFood />
         </div>
-        <div className=''>
+        <div className='flex justify-center'>
           <AddCustomFood />
         </div>
       </div>
