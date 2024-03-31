@@ -1,6 +1,7 @@
 "use client";
 import { SearchFood } from './_components/searchfood';
 import { AddCustomFood } from './_components/addcustomfood';
+import { GenerateMeal } from './_components/generatemeal'
 
 export default function AddFoodPage() {
 
@@ -11,9 +12,13 @@ export default function AddFoodPage() {
         <div className='flex justify-center pt-12'>
           <SearchFood />
         </div>
-        <div className='flex justify-center'>
+        <div className='flex justify-center gap-12'>
           <AddCustomFood />
+          <GenerateMeal />
         </div>
+        <h1 class="text-3xl font-semibold text-amber-950 text-center">
+            History
+        </h1>
       </div>
     </div>
   );
