@@ -56,7 +56,7 @@ export default function CustomFoodForm() {
         <label className="text-[18px] text-[#4C220A]" htmlFor="food_name">Food Name:</label>
         <input
         className="border-2 border-[#4C220A] p-2 rounded"
-        placeholder="Enter the calorie amount (Kcal)"
+        placeholder="Enter the meal's name"
         id="food_name"
         name="food_name"
         type="text"
