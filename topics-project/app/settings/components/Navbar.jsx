@@ -35,13 +35,19 @@ function Navbar() {
         {items_list.map((item) => {
           if (item.toLowerCase() === current) {
             return (
-              <button className="text-[#4C220A] color-red cursor-pointer bg-[#D79C59] w-[110px] h-[30px] rounded  bg-opacity-[33.5%] text-opacity-[60%]">
+              <button
+                key={item}
+                className="text-[#4C220A] color-red cursor-pointer bg-[#D79C59] w-[110px] h-[30px] rounded  bg-opacity-[33.5%] text-opacity-[60%]"
+              >
                 {item}
               </button>
             );
           } else {
             return (
-              <button className="text-[#4C220A] opacity-[60%] cursor-pointer ">
+              <button
+                key={item}
+                className="text-[#4C220A] opacity-[60%] cursor-pointer "
+              >
                 {item}
               </button>
             );
