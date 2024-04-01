@@ -34,11 +34,11 @@ export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
         </label>
         <input
           className="border-2 border-[#4C220A] p-2 pl-4 rounded-sm mb-5"
-          id="name"
-          name="name"
+          id="weight"
+          name="weight"
           type="number"
           placeholder="Enter your weight"
-          value={formData.name}
+          value={formData.weight}
           onChange={handleInputChange}
           required
         />
@@ -83,9 +83,9 @@ export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
           required
         >
           <option value="">Select goal</option>
-          <option value="losing">Losing weight</option>
+          <option value="losing weight">Losing weight</option>
           <option value="maintenance">Maintenance</option>
-          <option value="gaining">Gaining weight</option>
+          <option value="gaining weight">Gaining weight</option>
         </select>
 
         <div className="flex gap-2 items-center justify-center w-full mt-3">

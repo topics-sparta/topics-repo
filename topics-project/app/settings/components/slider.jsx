@@ -16,11 +16,11 @@ function Slider({ label_tag, metrics, handleFormChange, formData }) {
 
           <input
             type="range"
-            min="48" // 4 feet (48 inches)
-            max="84" // 7 feet (84 inches)
+            min="10"
+            max="99"
             name="height"
             step="0.1"
-            value={formData.height}
+            value={formData.height || 2}
             onChange={handleFormChange}
             className="w-full h-[2.2px] mb-6 rounded-lg appearance-none cursor-pointer bg-customAccent"
           />
@@ -36,10 +36,10 @@ function Slider({ label_tag, metrics, handleFormChange, formData }) {
 
           <input
             type="range"
-            min="48" // 4 feet (48 inches)
-            max="84" // 7 feet (84 inches)
+            min="30" // 4 feet (48 inches)
+            max="1100" // 7 feet (84 inches)
             name="weight"
-            value={formData.weight}
+            value={formData.weight || 30}
             onChange={handleFormChange}
             className="w-full h-[2.2px] mb-6 rounded-lg appearance-none cursor-pointer bg-customAccent"
           />

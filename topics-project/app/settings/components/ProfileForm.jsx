@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "./slider";
 import DropDownTW from "./DropDownTW";
 
-function ProfileForm() {
+function ProfileForm({ currentUser }) {
   const [formData, updateFormData] = useState({
-    name: "",
-    height: 0,
-    weight: 0,
-    goal: "",
+    username: "",
+    height: currentUser.height,
+    weight: currentUser.weight,
+    goal: currentUser.goal,
   });
 
   const handleFormChange = (e) => {
@@ -20,10 +20,33 @@ function ProfileForm() {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("clicked, ", formData);
+
+    const response = await fetch(
+      "http://localhost:3000/api/update-user-details",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          formData,
+          uuid: "3523a764-3925-4f8a-bdac-0436313a2be6",
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
   };
+
+  useEffect(() => {
+    formData.height = currentUser.height;
+    formData.weight = currentUser.weight;
+    formData.username = currentUser.username;
+    formData.goal = currentUser.goal;
+    console.log("dd: ", formData.username);
+  }, [currentUser]);
 
   return (
     <form
@@ -50,9 +73,9 @@ function ProfileForm() {
             </h1>
             <input
               className="h-8 w-[200px] mt-2 rounded-md border-[#4C220A] focus:outline-none opacity-[60%] border-2 border-solid pl-4 font-redHatText text-base"
-              placeholder="Put Current Name here"
+              placeholder={formData.username}
               // id="password"
-              name="name"
+              name="username"
               type="text"
               onChange={(e) => {
                 handleFormChange(e);
@@ -89,7 +112,11 @@ function ProfileForm() {
           <h1 className="font-redHatText font-medium text-xl text-customAccent mt-[18px] ">
             Goal
           </h1>
-          <DropDownTW formData={formData} handleFormChange={handleFormChange} />
+          <DropDownTW
+            formData={formData}
+            handleFormChange={handleFormChange}
+            goalOnInit={currentUser.goal}
+          />
           {/* <GoalDropDown
             handleFormChange={handleFormChange}
             formData={formData}

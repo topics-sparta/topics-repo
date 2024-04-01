@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
@@ -11,8 +11,13 @@ function classNames(...classes) {
 // Power Lifting
 // Maintenance
 
-export default function DropDownTW({ formData, handleFormChange }) {
-  const [selected, setSelected] = useState("NOTHING");
+export default function DropDownTW({ formData, handleFormChange, goalOnInit }) {
+  const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    setSelected(goalOnInit);
+  }, [goalOnInit]);
+
   return (
     <Menu as="div" className="relative inline-block text-left w-[200px] mt-2  ">
       <div>
