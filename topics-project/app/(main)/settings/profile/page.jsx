@@ -26,7 +26,7 @@ function Profile() {
 
   const fetchUserDetails = async (id) => {
     const data = await fetch(
-      `http://localhost:3000/api/get-user-details/${id}`
+      `https://sparta-ten.vercel.app/api/get-user-details/${id}`
     );
     console.log("running!");
     const res = await data.json();
