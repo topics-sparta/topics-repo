@@ -7,7 +7,8 @@ import { useEffect, useRef } from "react";
 import {
   Alert,
   AlertTitle,
-} from "../../../@/components/alert";
+} from "../../../../@/components/alert";
+import { useRouter } from "next/navigation";
 
 export function SubmitButton() {
   const { pending } = useFormStatus();
@@ -33,12 +34,14 @@ export default function LoginPage() {
     },
   });
 
+  const router = useRouter();
+
   const formRef = useRef(null);
 
   useEffect(() => {
     if (formState.message === "success") {
       formRef.current?.reset();
-      // TO DO: Add routing to dashboard when route is created
+      router.push('/home')
     }
   }, [formState]);
 
