@@ -1,13 +1,15 @@
-"use client"
+"use client";
 
 export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
-
   return (
     <div>
-      <form onSubmit={handleSubmit} className="flex flex-col w-[300px] md:w-[400px] gap-1">
-        <label
-          className="text-2xl font-bold mb-3"
-          htmlFor="height">Height</label>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col w-[300px] md:w-[400px] gap-1"
+      >
+        <label className="text-2xl font-bold mb-3" htmlFor="height">
+          Height
+        </label>
         <input
           className="appearance-none h-1 w-full bg-customAccent rounded-full cursor-pointer"
           id="height"
@@ -20,11 +22,16 @@ export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
           onChange={handleInputChange}
           required
         />
-        <div className="text-center relative font-bold text-lg mb-2" htmlFor="height">{inchesToFeetInches(formData.height)}</div>
+        <div
+          className="text-center relative font-bold text-lg mb-2"
+          htmlFor="height"
+        >
+          {inchesToFeetInches(formData.height)}
+        </div>
 
-        <label
-          className="text-2xl font-bold mb-3"
-          htmlFor="weight">Weight (lbs)</label>
+        <label className="text-2xl font-bold mb-3" htmlFor="weight">
+          Weight (lbs)
+        </label>
         <input
           className="border-2 border-[#4C220A] p-2 pl-4 rounded-sm mb-5"
           id="name"
@@ -86,12 +93,14 @@ export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
           <div className="w-3 h-3 rounded-full bg-black"></div>
         </div>
         <button className="w-full mt-1 h-14 flex justify-center items-center rounded-md bg-customSecondary text-customPrimary hover:text-customPrimary hover:bg-customAccent transition-colors duration-300">
-          <p className="font-poppins font-bold text-base md:text-xl">CREATE ACCOUNT</p>
+          <p className="font-poppins font-bold text-base md:text-xl">
+            CREATE ACCOUNT
+          </p>
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 function inchesToFeetInches(inches) {
   const feet = Math.floor(inches / 12);
