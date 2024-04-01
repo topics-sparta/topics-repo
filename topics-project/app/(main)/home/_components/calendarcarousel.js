@@ -33,7 +33,7 @@ export const CalendarCarousel = () => {
   };
 
   return (
-    <div className="max-w-full w-full lg:w-8/12 lg:mx-auto">
+    <div className="max-w-full w-full lg:mx-auto">
       <div className="w-full grid grid-cols-7">
         {dates.map(renderDateBlock)}
       </div>

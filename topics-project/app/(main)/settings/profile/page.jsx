@@ -1,13 +1,8 @@
 "use client";
 import ProfileForm from "../components/ProfileForm";
-
-import Navbar from "../components/Navbar";
-import NavbarDropDown from "../components/NavbarDropDown";
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
-
-// import { createClient } from "../../../src/utils/supabase/server";
 
 function Profile() {
   const [currentUser, setCurrentUser] = useState("");
@@ -46,12 +41,7 @@ function Profile() {
     // fetchUserDetails();
   }, []);
   return (
-    <div className="w-screen bg-[#FFF7ED] h-screen flex flex-col items-center ">
-      <p className="font-bold text-3xl md:text-4xl text-customAccent font-poppins">
-        Settings
-      </p>
-      <Navbar />
-      <NavbarDropDown />
+    <div className="w-full bg-[#FFF7ED] h-full flex flex-col items-center ">
       {loading ? <div>loading</div> : <ProfileForm currentUser={currentUser} />}
     </div>
   );

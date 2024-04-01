@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 function Slider({ label_tag, metrics, handleFormChange, formData }) {
   return (
     <div className="md:w-[25%] w-full flex-col flex items-center justify-center md:my-0 mb-3 ">
