@@ -41,7 +41,6 @@ export default function LoginPage() {
   useEffect(() => {
     if (formState.message === "success") {
       formRef.current?.reset();
-      // TO DO: Add routing to dashboard when route is created
       router.push('/home')
     }
   }, [formState]);
