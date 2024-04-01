@@ -56,7 +56,7 @@ export default function HomePage() {
     <div className="w-full h-full bg-customPrimary">
       <div className="w-full xl:w-11/12 mx-auto h-full">
       <div className="lg:max-w-screen-xl mx-auto px-4 xl:px-0 flex flex-col gap-8">
-        <div class="flex items-center justify-between mt-4">
+        <div class="flex items-center justify-between mt-8">
           <div class="flex items-center text-customAccent">
             <div class="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
             <div>
@@ -75,7 +75,7 @@ export default function HomePage() {
         <div class="flex items-center justify-center">
           <CalendarCarousel />
         </div>
-        <div class="flex flex-row justify-around">
+        <div class="flex flex-row justify-around w-full">
           <div
             className="bg-customAccent/10 rounded-lg shadow-lg w-6/12 h-fit p-2 max-w-52 flex flex-col justify-between"
           >

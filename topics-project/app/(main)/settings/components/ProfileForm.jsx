@@ -126,7 +126,7 @@ function ProfileForm({ currentUser }) {
           </button>
           <button
             className="flex w-[190px] color-[#FFF7ED] rounded-md h-[35px] mt-4 bg-customSecondary 
-          font-medium hover:bg-customAccent  transition-colors duration-300 flex justify-center items-center"
+          font-medium hover:bg-customAccent  transition-colors duration-300 justify-center items-center"
           >
             Save Changes
           </button>
