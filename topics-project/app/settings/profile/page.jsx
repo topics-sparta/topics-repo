@@ -25,7 +25,6 @@ function Profile() {
       router.push("/login");
     } else {
       setLoading(false);
-      console.log(data.user);
       fetchUserDetails(data.user.id);
     }
   };

@@ -37,7 +37,6 @@ function ProfileForm({ currentUser }) {
       }
     );
     const data = await response.json();
-    console.log(data);
   };
 
   useEffect(() => {
@@ -45,7 +44,6 @@ function ProfileForm({ currentUser }) {
     formData.weight = currentUser.weight;
     formData.username = currentUser.username;
     formData.goal = currentUser.goal;
-    console.log("dd: ", formData.username);
   }, [currentUser]);
 
   return (

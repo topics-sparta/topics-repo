@@ -9,8 +9,6 @@ export async function POST(request) {
 
   const data = await request.json();
 
-  console.log(data.uuid);
-
   try {
     //
     // get id from req.body
