@@ -2,8 +2,8 @@
 import { Food } from "./_components/food";
 import { CalendarCarousel } from "./_components/calendarcarousel";
 import { CalendarSearch } from "lucide-react";
-import { useFetchCalories } from "./action";
-
+import { useFetchMetrics, useFetchUserInfo } from "./action";
+import Macros from "./_components/macros";
 export default function HomePage() {
   {
     /* Issue with full sized screen, white space on both corners and bottom, whitespace always present after food card (needs addressing) */
@@ -13,8 +13,9 @@ export default function HomePage() {
   }
 
   const name = "Johan";
-  const userID = "3523a764-3925-4f8a-bdac-0436313a2be6";
-  const { calories, loading, error } = useFetchCalories(userID);
+  const userID = "65567f92-7a4e-4d12-b1dc-1c4e2dd7343f";
+  const { calories, fat, carbs, protein, loading, error } = useFetchMetrics(userID);
+  const { proteinGoal, fatGoal, carbsGoal } = useFetchUserInfo(userID);
 
   function getFormattedDate() {
     const daysOfWeek = [
@@ -52,7 +53,8 @@ export default function HomePage() {
   const formattedDate = getFormattedDate();
 
   return (
-    <div className="w-full min-h-[calc(100vh-64px)] bg-customPrimary">
+    <div className="w-full h-full bg-customPrimary">
+      <div className="w-full xl:w-11/12 mx-auto h-full">
       <div className="lg:max-w-screen-xl mx-auto px-4 xl:px-0 flex flex-col gap-8">
         <div class="flex items-center justify-between mt-4">
           <div class="flex items-center text-customAccent">
@@ -73,7 +75,7 @@ export default function HomePage() {
         <div class="flex items-center justify-center">
           <CalendarCarousel />
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-row justify-around">
           <div
             className="bg-customAccent/10 rounded-lg shadow-lg w-6/12 h-fit p-2 max-w-52 flex flex-col justify-between"
           >
@@ -114,6 +116,8 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+
+          <Macros protein={protein} fat={fat} carbs={carbs} proteinGoal={proteinGoal} fatGoal={fatGoal} carbGoal={carbsGoal}/>
         </div>
         <div class="flex flex-col gap-4">
           <h1 class="text-2xl font-semibold text-amber-950 text-start">
@@ -121,6 +125,7 @@ export default function HomePage() {
           </h1>
           <Food foodName="Eggs" mealType="Breakfast" quantity={4} kcals={320} />
         </div>
+      </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client"
 import { ChevronRight } from "lucide-react"
-import mobileView from "../../../public/mobileView.png"
-import desktopView from "../../../public/DesktopView.png"
+import mobileView from "../../../../public/mobileView.png"
+import desktopView from "../../../../public/DesktopView.png"
 import Image from "next/image"
 import Link from "next/link"
 
