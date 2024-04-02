@@ -6,8 +6,6 @@ import DropDownTW from "./DropDownTW";
 import { useRouter, usePathname } from "next/navigation";
 
 function ProfileForm({ currentUser }) {
-  console.log(currentUser);
-
   const origin = window.location.origin; // gets origin , either prod url or localhost
 
   const [formData, updateFormData] = useState({
