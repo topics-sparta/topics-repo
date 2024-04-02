@@ -19,7 +19,7 @@ function Profile() {
     } else if (!data.user) {
       router.push("/login");
     } else {
-      setLoading(false);
+      // setLoading(false);
       fetchUserDetails(data.user.id);
     }
   };
@@ -27,12 +27,14 @@ function Profile() {
   const fetchUserDetails = async (id) => {
     const data = await fetch(
       `https://sparta-ten.vercel.app/api/get-user-details/${id}`
+      // `http://localhost:3000/api/get-user-details/${id}`
     );
     console.log("running!");
     const res = await data.json();
 
     if (res.status == 200) {
       setCurrentUser(res.users);
+      setLoading(false);
     }
   };
 
