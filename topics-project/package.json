@@ -17,6 +17,7 @@
     "@radix-ui/react-slider": "^1.1.2",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.7",
+    "@testing-library/user-event": "^14.5.2",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "barcode-react-scanner": "^1.2.0",
