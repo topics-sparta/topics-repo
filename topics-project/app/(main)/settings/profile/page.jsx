@@ -11,6 +11,7 @@ function Profile() {
   const router = useRouter();
 
   const getCurrentUser = async () => {
+    const origin = window.location.origin;
     const { data, error } = await supabase.auth.getUser();
 
     if (error) {
@@ -25,11 +26,8 @@ function Profile() {
   };
 
   const fetchUserDetails = async (id) => {
-    const data = await fetch(
-      `https://sparta-ten.vercel.app/api/get-user-details/${id}`
-      // `http://localhost:3000/api/get-user-details/${id}`
-    );
-    console.log("running!");
+    const data = await fetch(`${origin}/api/get-user-details/${id}`);
+
     const res = await data.json();
 
     if (res.status == 200) {
@@ -40,7 +38,6 @@ function Profile() {
 
   useEffect(() => {
     getCurrentUser();
-    // fetchUserDetails();
   }, []);
   return (
     <div className="w-full bg-[#FFF7ED] h-full flex flex-col items-center ">

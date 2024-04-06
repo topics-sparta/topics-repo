@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import Slider from "./slider";
 import DropDownTW from "./DropDownTW";
+import { useRouter, usePathname } from "next/navigation";
 
 function ProfileForm({ currentUser }) {
+  const origin = window.location.origin; // gets origin , either prod url or localhost
+
   const [formData, updateFormData] = useState({
-    username: "",
+    username: currentUser.username,
     height: currentUser.height,
     weight: currentUser.weight,
     goal: currentUser.goal,
@@ -23,20 +26,22 @@ function ProfileForm({ currentUser }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(
-      "http://localhost:3000/api/update-user-details",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          formData,
-          uuid: "3523a764-3925-4f8a-bdac-0436313a2be6",
-        }),
-      }
-    );
-    const data = await response.json();
+    const response = await fetch(`${origin}/api/update-user-details`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formData,
+        uuid: currentUser.uuid,
+      }),
+    });
+    const { newUser, status, error } = await response.json();
+    if (error) {
+      console.log(error);
+    } else if (status === 204) {
+      window.location.reload();
+    }
   };
 
   useEffect(() => {
@@ -78,7 +83,6 @@ function ProfileForm({ currentUser }) {
               onChange={(e) => {
                 handleFormChange(e);
               }}
-              required
             />
           </div>
           <hr className=" h-[2px] my-6  border-0  opacity-[12%] bg-[#4C220A] " />
