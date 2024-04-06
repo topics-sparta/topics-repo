@@ -40,7 +40,6 @@ function ProfileForm({ currentUser }) {
     if (error) {
       console.log(error);
     } else if (status === 204) {
-      console.log(newUser);
       window.location.reload();
     }
   };
