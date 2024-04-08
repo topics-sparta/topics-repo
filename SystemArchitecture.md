@@ -15,7 +15,7 @@ Sparta consists of three components: a web client, an application server, and a 
 So far we have two entities in our database: `users` and `nutrition_log`. User information and goals are stored in the `users` tables. And, the `nutrition_log` table keeps track of the macronutrients and micronutrients of specific food products. In addition, the nutrition_log has a column called uuid that references to the `users` table's uuid (this is the foreign key). Additionally, the nutrition_log and the user's table have a one-to-many link. In the `nutrition log`, users can make multiple entries, but each entry is related to one specific user. 
 
 
-# Sequence Diagram for Signin
+# Sequence Diagram for Sign In
 
 ![Screen Shot 2024-04-07 at 10 59 00 PM](https://github.com/topics-sparta/topics-repo/assets/91035430/7ec99587-7308-44e4-b5cf-b30bb0abc1df)
 
