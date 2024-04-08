@@ -3,7 +3,7 @@
 # Component Diagram
 ![Component Diagram](https://github.com/topics-sparta/topics-repo/assets/91035430/8a3eed9d-9232-4fe5-b4a3-1db11679ea7b)
 
-Sparta consists of three components: a web client, an application server, and a database server. Our app's front end is provided to the user through the web client. When users make fetch or post request (depending on which component they're on), the web client sends a HTTPS request with JSON data to the app server. In response to the action, the app server sends an HTTPS request with  JSON data to the database server, which is Supabase. In either case, the database server (Supabase) stores the data or sends it to the app server. 
+Sparta consists of three components: a web client, an application server, and a database server. Our app's front end is provided to the user through the web client. When users make fetch or post requests (depending on which component they're on), the web client sends a HTTPS request with JSON data to the app server. In response to the action, the app server sends an HTTPS request with  JSON data to the database server, which is Supabase. In either case, the database server (Supabase) stores the data or sends it to the app server. 
 
 
 
