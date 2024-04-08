@@ -15,10 +15,12 @@ Sparta consists of three components: a web client, an application server, and a 
 So far we have two entities in our database: `users` and `nutrition_log`. User information and goals are stored in the `users` tables. And, the `nutrition_log` table keeps track of the macronutrients and micronutrients of specific food products. In addition, the nutrition_log has a column called uuid that references to the `users` table's uuid (this is the foreign key). Additionally, the nutrition_log and the user's table have a one-to-many link. In the `nutrition log`, users can make multiple entries, but each entry is related to one specific user. 
 
 
+# Sequence Diagram for Signin
+
 ![Screen Shot 2024-04-07 at 10 59 00 PM](https://github.com/topics-sparta/topics-repo/assets/91035430/7ec99587-7308-44e4-b5cf-b30bb0abc1df)
 
 
 
 
-# Sequence Diagram for Signin
+
 The user loads into the application and will view the landing page. From there, if the user has an account they will be prompted to sign in. When the user clicks the sign-in button, they will be redirected to the `sign-in` page. From there, the user will enter their credentials. The credentials will then be passed into `login/actions`. Before the information is sent to the Database Server, if there are any errors ( missing fields, invalid email syntax ) it will notify the user. When the information reaches the Database Server, the DB will either return an error or a success. If there is an error, the error will be sent back to the `login-page` where the user will be able to view it. If there is no error ( success) then the user will be redirected to the `user-dashboard` where they can view their dairy, activity, settings, etc.
