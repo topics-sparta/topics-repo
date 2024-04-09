@@ -6,6 +6,11 @@ import LoginPage from "../app/(welcome)/(auth)/login/page";
 import { createClient } from "../src/utils/supabase/client";
 import { login } from "../app/(welcome)/(auth)/login/actions";
 
+jest.mock('next/navigation', () => ({
+  ...require('next-router-mock'),
+  useSearchParams: () => jest.fn(),
+}));
+
 jest.mock("../src/utils/supabase/client", () => ({
   createClient: jest.fn().mockReturnValue({
     auth: {
