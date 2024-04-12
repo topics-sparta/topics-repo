@@ -2,6 +2,7 @@
 import { SearchFood } from './_components/searchfood';
 import { AddCustomFood } from './_components/addcustomfood';
 import { GenerateMeal } from './_components/generatemeal'
+import { ScanBarcode_ } from './_components/scanbarcode'
 import { useRouter } from "next/navigation";
 
 export default function AddFoodPage() {
@@ -17,6 +18,7 @@ export default function AddFoodPage() {
         <div className='flex justify-center gap-12'>
           <AddCustomFood router={router}/>
           <GenerateMeal />
+          <ScanBarcode_ />
         </div>
         <h1 class="text-3xl font-semibold text-amber-950 text-center">
             History
