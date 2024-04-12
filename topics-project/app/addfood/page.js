@@ -2,9 +2,11 @@
 import { SearchFood } from './_components/searchfood';
 import { AddCustomFood } from './_components/addcustomfood';
 import { GenerateMeal } from './_components/generatemeal'
+import { useRouter } from "next/navigation";
 
 export default function AddFoodPage() {
 
+  const router = useRouter();
 
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-customPrimary">
@@ -13,7 +15,7 @@ export default function AddFoodPage() {
           <SearchFood />
         </div>
         <div className='flex justify-center gap-12'>
-          <AddCustomFood />
+          <AddCustomFood router={router}/>
           <GenerateMeal />
         </div>
         <h1 class="text-3xl font-semibold text-amber-950 text-center">
