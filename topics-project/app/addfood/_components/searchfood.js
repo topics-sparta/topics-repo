@@ -29,20 +29,22 @@ export const SearchFood = () => {
     };
 
     return (
-        <div className="flex items-center bg-[#D79C59] rounded-full w-1/2 shadow">
-            <Search className="ml-4" color="#FFF7ED" size={20} />
-            <form onSubmit={handleSubmit} className="flex-grow">
-                <input
-                    className="flex-grow p-2 bg-[#D79C59] text-[#FFF7ED] placeholder-[#FFF7ED] rounded-full w-full outline-none"
-                    placeholder="Search for any foods..."
-                    id="food_search"
-                    name="food_search"
-                    type="text"
-                    value={formData.food_search}
-                    onChange={handleChange}
-                    required
-                />
-            </form>
+        <div className="flex justify-center w-full">
+            <div className="flex items-center bg-[#D79C59] rounded-full shadow w-full sm:max-w-xl lg:max-w-2xl">
+                <Search className="ml-4" color="#FFF7ED" size={20} />
+                <form onSubmit={handleSubmit} className="flex-grow">
+                    <input
+                        className="flex-grow p-2 bg-[#D79C59] text-[#FFF7ED] placeholder-[#FFF7ED] rounded-full w-full outline-none"
+                        placeholder="Search for any foods..."
+                        id="food_search"
+                        name="food_search"
+                        type="text"
+                        value={formData.food_search}
+                        onChange={handleChange}
+                        required
+                    />
+                </form>
+            </div>
         </div>
     );
 };
