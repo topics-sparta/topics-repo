@@ -27,10 +27,12 @@ export default function AddFoodPage() {
             <ScanBarcodeBtn />
           </div>
         </div>
-        <div className="w-full text-start sm:text-center">
-          <h1 className="text-3xl font-semibold text-amber-950">
-            History
-          </h1>
+        <div className='flex justify-center w-full pt-12 lg:pt-0'>
+          <div className="w-full sm:max-w-xl lg:max-w-2xl mx-auto">
+            <h1 className="text-3xl font-semibold text-amber-950 text-left">
+              History
+            </h1>
+          </div>
         </div>
       </div>
     </div>
