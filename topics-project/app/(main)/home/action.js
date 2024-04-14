@@ -73,4 +73,35 @@ export const useFetchUserInfo = (userID) => {
   return { calorieGoal, proteinGoal, fatGoal, carbsGoal, loading, error };
 };
 
+export const useFetchNutritionByDate = (userID, date) => {
+  const [nutritionEntries, setNutritionEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    fetch(`/api/fetch-nutrition-via-date/${userID}/${date}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          setError(data.error);
+        } else {
+          const entries = data.data_by_date.map(entry => ({
+            foodName: entry.food_name, 
+            calories: entry.calories    
+          }));
+          setNutritionEntries(entries);
+        }
+      })
+      .catch(error => {
+        setError('Failed to fetch data');
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userID, date]); 
+  return { nutritionEntries, loading, error };
+};
+
+
 
