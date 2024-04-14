@@ -26,8 +26,10 @@ export async function GET(request, context) {
       });
     }
 
+    const first_15_foods = food_result.slice(0, 15);
+
     return NextResponse.json({
-      food_data: food_result,
+      food_data: first_15_foods,
       status: 200,
     });
   } catch (error) {
