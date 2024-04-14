@@ -4,18 +4,42 @@ import { CalendarCarousel } from "./_components/calendarcarousel";
 import { CalendarSearch } from "lucide-react";
 import { useFetchMetrics, useFetchUserInfo } from "./action";
 import Macros from "./_components/macros";
+import { createClient } from "@/utils/supabase/client";
+
 export default function HomePage() {
+  const supabase = createClient();
   {
     /* Issue with full sized screen, white space on both corners and bottom, whitespace always present after food card (needs addressing) */
   }
   {
     /* take array / storage from action . js and map to the food component (adjust UI of food component as well) */
   }
+  {
+    /* To get log for user nutrition :
+    get id : fetchUserDetails(data.user.id);
+    pass id as well as date ( from carousel figure out how to get it and put into mm-dd-yyyy format into http://localhost:3000/api/fetch-nutrition-via-date/<user_id>/<date> ( done in action.js)
+    store data somewhere, need the food name, kcals, mealtype? quantity?
+    pass data to page.js and input into component based on how many records there are
+    test many entries how it renders on front end*/
+  }
+  var userID = "";
+
+  const getUserID = async () => {
+    const origin = window.location.origin;
+    const { data, error } = await supabase.auth.getUser();
+
+    if (error) {
+      console.error("Error fetching user:", error.message);
+    } else {
+      userID = data.user.id;
+    }
+  };
+  getUserID();
 
   const name = "Johan";
-  const userID = "65567f92-7a4e-4d12-b1dc-1c4e2dd7343f";
+  
   const { calories, fat, carbs, protein, loading, error } = useFetchMetrics(userID);
-  const { proteinGoal, fatGoal, carbsGoal } = useFetchUserInfo(userID);
+  const { proteinGoal, fatGoal, carbsGoal, userName } = useFetchUserInfo(userID);
 
   function getFormattedDate() {
     const daysOfWeek = [
@@ -62,7 +86,7 @@ export default function HomePage() {
             <div>
               <h1 className="greeting text-3xl font-poppins">
                 <span className="font-normal">Hello, </span>
-                <span class="text-3xl font-bold">{name}</span>
+                <span class="text-3xl font-bold">{userName}</span>
               </h1>
               <p class="text-customAccent/50">{formattedDate}</p>
             </div>
