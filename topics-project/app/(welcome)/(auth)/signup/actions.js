@@ -8,23 +8,23 @@ const insertDataInUserTable = async (id, formData) => {
     let dailyCalorieGoal, dailyFatGoal, dailyProteinGoal, dailyCarbGoal;
     
     // using some standard multipliers we can estimate a goal for daily goals
-    if (formData.goal === "maintain") {
+    if (formData.goal === "maintenance") {
       dailyCalorieGoal = Math.round(formData.weight * 15);
       dailyProteinGoal = Math.round(formData.weight * 0.8);
-      dailyFatGoal = Math.round(formData.weight * 0.35); 
-      dailyCarbGoal = Math.round(formData.weight * 1);
+      dailyFatGoal = Math.round((dailyCalorieGoal * 0.20) / 9); 
+      dailyCarbGoal = Math.round((dailyCalorieGoal - ((dailyProteinGoal * 4) + (dailyFatGoal * 9))) / 4);
 
     } else if (formData.goal =="gaining weight") {
-        dailyCalorieGoal = Math.round(formData.weight * 180);
-        dailyProteinGoal = Math.round(formData.weight * 1);
-        dailyFatGoal = Math.round(formData.weight * 0.38); 
-        dailyCarbGoal = Math.round(formData.weight * 1.2); 
+        dailyCalorieGoal = Math.round((formData.weight * 15)  + 300);
+        dailyProteinGoal = Math.round(formData.weight * .8);
+        dailyFatGoal = Math.round((dailyCalorieGoal * 0.20) / 9); 
+        dailyCarbGoal = Math.round((dailyCalorieGoal - ((dailyProteinGoal * 4) + (dailyFatGoal * 9))) / 4); 
     }
     else{
-      dailyCalorieGoal = Math.round(formData.weight * 140); 
-      dailyProteinGoal = Math.round(formData.weight * 0.8); 
-      dailyFatGoal = Math.round(formData.weight * 0.30); 
-      dailyCarbGoal = Math.round(formData.weight * .8);
+      dailyCalorieGoal = Math.round((formData.weight * 15)  - 300); 
+      dailyProteinGoal = Math.round(formData.weight * .8); 
+      dailyFatGoal = Math.round((dailyCalorieGoal * 0.20) / 9); 
+      dailyCarbGoal = Math.round((dailyCalorieGoal - ((dailyProteinGoal * 4) + (dailyFatGoal * 9))) / 4);
     }
     const supabase = createClient();
 
