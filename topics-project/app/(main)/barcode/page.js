@@ -4,10 +4,11 @@ import React, { useState, useEffect, use } from 'react';
 import BarCodeScanner from 'barcode-react-scanner';
 import { X } from 'lucide-react';
 import Webcam from "react-webcam";
-import { fetchFoodInfo } from './actions';
+import { useRouter } from 'next/navigation';
 
 export default function BarcodePage() {
   const [code, setCode] = useState('');
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,11 +17,7 @@ export default function BarcodePage() {
 
   const handleSubmit = async () => {
     try {
-      const foodInfo = await fetchFoodInfo(code);
-      if (foodInfo) {
-        console.log(foodInfo);
-        // TODO: redirect to food-item page with foodInfo
-      }
+        router.push(`/foodItem?barcode=${code.substring(1)}`);
     } catch (error) {
       console.error(error);
       // TODO: show error message to user

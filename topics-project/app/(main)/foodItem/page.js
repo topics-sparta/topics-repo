@@ -4,34 +4,41 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, Loader, Plus } from "lucide-react";
 import { PieChart } from "react-minimal-pie-chart";
 import MealTimeDropDown from "../_components/mealTimeDropdown";
+import { fetchFoodInfo } from "../barcode/actions";
 
 export default function FoodItem() {
   const [isLoading, setIsLoading] = useState(true);
   const [numberOfServings, setNumberOfServings] = useState(1);
-  // TO DO: Mimic retrieving barcode from params
+  const [macros, setMacros] = useState(
+    {
+      name: "",
+      brand: "",
+      servingSize: 0,
+      servingSizeUnit: "",
+      calories: 0,
+      protein: 0,
+      carbohydrates: 0,
+      fat: 0,
+    }
+  )
   const foodItemParams = useSearchParams();
   const barcode = foodItemParams.get("barcode");
-  // TO DO: Mimic the api endpoint call using the barcode from params
-  // For now, we will hardcode the response
-  const macros = {
-    name: "CHOCOLATE PEANUT BUTTER BAR, CHOCOLATE PEANUT BUTTER",
-    brand: "PURE PROTEIN",
-    servingSize: 50,
-    servingSizeUnit: "GRM",
-    calories: 200,
-    protein: 20,
-    carbohydrates: 17,
-    fat: 7,
-  };
 
   useEffect(() => {
     // TO DO: Once the response is retrieved, then display either an error page or the actual food-item page
     // This is the case if wrong response is retrieved (an error)
+    const fetchMacros = async () => {
+      const foodInfo = await fetchFoodInfo(barcode);
+      setMacros(foodInfo);
+    }
+    fetchMacros()
+
     if (macros === null) {
+      setIsLoading(true);
     } else {
       setIsLoading(false);
     }
-  });
+  }, []);
 
   if (isLoading) {
     return (
