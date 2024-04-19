@@ -10,7 +10,7 @@ import {
   AlertTitle,
 } from "../../../../@/components/alert";
 
-import { signup } from "./actions"
+import { signup } from "./actions";
 
 export default function SignupPage() {
   const [errorMsg, setErrorMsg] = useState("");

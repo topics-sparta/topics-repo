@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { createClient } from "../../../../src/utils/supabase/server";
 
 const insertDataInUserTable = async (id, formData) => {

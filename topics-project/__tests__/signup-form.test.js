@@ -88,12 +88,6 @@ describe('Metrics Form', () => {
     expect(weightField).toBeInTheDocument()
   })
 
-<<<<<<< HEAD
-=======
-  it('sad path: error in info form when no params sent', () => {
-    expect(() => render(<MetricsForm />)).toThrow("Cannot read properties of undefined");
-  })
->>>>>>> 96916c0 (combining tests)
 
   it('happy path: form fields fill out as expected', async () => {
     const formData = {
