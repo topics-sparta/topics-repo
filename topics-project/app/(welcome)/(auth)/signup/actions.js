@@ -38,21 +38,16 @@ export async function signup(formData) {
     },
   };
 
-  try {
-    const { data, error } = await supabase.auth.signUp(data_);
-    if (error) {
-      throw error;
-    }
-
-    insertDataInUserTable(data.user.id, formData);
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    return user;
-  } catch (error) {
-    console.log(error);
-    redirect("/error");
+  const { data, error } = await supabase.auth.signUp(data_);
+  if (error) {
+    throw error;
   }
+
+  insertDataInUserTable(data.user.id, formData);
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  return user;
 }
