@@ -11,7 +11,6 @@ import {
 } from "../../../../@/components/alert";
 
 import { signup } from "./actions";
-import { set } from "date-fns";
 
 export default function SignupPage() {
   const [errorMsg, setErrorMsg] = useState("");
