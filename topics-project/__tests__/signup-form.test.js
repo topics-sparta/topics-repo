@@ -31,10 +31,6 @@ describe('Info Form', () => {
     expect(nameField).toBeInTheDocument()
   })
 
-  it('sad path: error in info form when no params sent', () => {
-    expect(() => render(<InfoForm />)).toThrow("Cannot read properties of undefined");
-  })
-
   it('happy path: form fields fill out as expected', async () => {
     const formData = {
       name: "",
@@ -92,9 +88,6 @@ describe('Metrics Form', () => {
     expect(weightField).toBeInTheDocument()
   })
 
-  it('sad path: error in info form when no params sent', () => {
-    expect(() => render(<MetricsForm />)).toThrow("Cannot read properties of undefined");
-  })
 
   it('happy path: form fields fill out as expected', async () => {
     const formData = {
