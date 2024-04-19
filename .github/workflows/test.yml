@@ -25,6 +25,9 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Build Application
+      env:
+        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
       run: npm run build --prefix topics-project
       
     - name: Run unit and integration tests
