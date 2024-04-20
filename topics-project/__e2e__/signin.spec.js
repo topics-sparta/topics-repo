@@ -11,7 +11,6 @@ test('successfully sign into application', async ({ page }) => {
 
   await page.getByRole('button', { name: /LOGIN/i }).click();
 
-  const successAlert = await page.waitForSelector(`//*[contains(text(), 'Success!')]`);
-  const isVisible = await successAlert.isVisible();
-  expect(isVisible).toBeTruthy();
+  await page.waitForURL('http://localhost:3000/home')
+  expect(page.url()).toBe('http://localhost:3000/home');
 });
