@@ -4,11 +4,16 @@ import Link from 'next/link';
 import { useState } from "react";
 import { InfoForm } from "./_components/infoForm";
 import { MetricsForm } from "./_components/metricsForm";
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, BadgeAlert } from "lucide-react";
+import {
+  Alert,
+  AlertTitle,
+} from "../../../../@/components/alert";
 
-import { signup } from "./actions"
+import { signup } from "./actions";
 
 export default function SignupPage() {
+  const [errorMsg, setErrorMsg] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,6 +35,12 @@ export default function SignupPage() {
   const [showNext, setShowNext] = useState(false);
   const toggleNext = (e) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setErrorMsg("Passwords do not match");
+      return;
+    } else {
+      setErrorMsg("");
+    }
     setShowNext(!showNext);
   };
 
@@ -40,13 +51,21 @@ export default function SignupPage() {
       if (user)
         window.location.href = "/";
     } catch (error) {
-      console.log(error);
-      window.location.href = "/error";
+      setErrorMsg(error.message);
     }
   }
 
   return (
     <div className="min-h-[calc(100vh-64px)] bg-[#FFF7ED] font-poppins">
+      {errorMsg != "" ? (
+        <div className="absolute top-0 left-0 right-0 mx-auto max-w-60 font-redHatText animate-fade-down animate-duration-300 animate-ease-in-out">
+          <Alert className="mt-6 rounded-md border-transparent bg-red-400 text-white flex items-center justify-center gap-2">
+            <BadgeAlert className="h-4 w-4" color="white" />
+            <AlertTitle>{errorMsg}</AlertTitle>
+          </Alert>
+        </div>
+      ) : null}
+
       <div className="min-h-[calc(100vh-64px)] flex flex-col justify-center items-center text-[#4C220A]">
         <div className="flex justify-between w-[300px] md:w-[400px] items-center mb-4">
 
