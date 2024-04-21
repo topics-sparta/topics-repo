@@ -20,7 +20,6 @@ export default function HomePage() {
       if (error) {
         console.error("Error fetching user:", error.message);
       } else {
-        console.log(data.user)
         setUserID(data.user.id);
       }
     };
