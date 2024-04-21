@@ -70,7 +70,7 @@ export const useFetchUserInfo = (userID) => {
       });
   }, [userID]);
 
-  return { calorieGoal, proteinGoal, fatGoal, carbsGoal, loading, error };
+  return { calorieGoal, proteinGoal, fatGoal, carbsGoal, userName, loading, error };
 };
 
 export const useFetchNutritionByDate = (userID, date) => {

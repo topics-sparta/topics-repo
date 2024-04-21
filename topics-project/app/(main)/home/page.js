@@ -1,36 +1,43 @@
 "use client";
+import React, { useState, useEffect } from 'react';
 import { Food } from "./_components/food";
 import { CalendarCarousel } from "./_components/calendarcarousel";
 import { CalendarSearch } from "lucide-react";
 import { useFetchMetrics, useFetchUserInfo, useFetchNutritionByDate } from "./action";
 import Macros from "./_components/macros";
 import { createClient } from "@/utils/supabase/client";
+import { format } from 'date-fns';
 
 export default function HomePage() {
   const supabase = createClient();
 
-  var userID = "";
+  const [userID, setUserID] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const getUserID = async () => {
-    const origin = window.location.origin;
-    const { data, error } = await supabase.auth.getUser();
+  useEffect(() => {
+    const getUserID = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error("Error fetching user:", error.message);
+      } else {
+        console.log(data.user)
+        setUserID(data.user.id);
+      }
+    };
+    getUserID();
+  }, []);
 
-    if (error) {
-      console.error("Error fetching user:", error.message);
-    } else {
-      console.log(data.user.id);
-      userID = data.user.id;
-    }
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate); 
   };
-  getUserID();
 
-  const name = "Johan";
-  
+  const carouseldate = format(selectedDate, 'MM-dd-yyyy');
+    
   const { calories, fat, carbs, protein, loading, error } = useFetchMetrics(userID);
   const { proteinGoal, fatGoal, carbsGoal, userName } = useFetchUserInfo(userID);
 
   const NutritionList = () => {
-  const { nutritionEntries, loading, error } = useFetchNutritionByDate(userID, '04-14-2024');
+  const { nutritionEntries, loading, error } = useFetchNutritionByDate(userID, carouseldate);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -106,7 +113,7 @@ export default function HomePage() {
           </div>
         </div>
         <div class="flex items-center justify-center">
-          <CalendarCarousel />
+          <CalendarCarousel onDateChange={handleDateChange}/>
         </div>
         <div class="flex flex-row justify-around w-full">
           <div
