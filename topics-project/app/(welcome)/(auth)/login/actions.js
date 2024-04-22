@@ -1,36 +1,22 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
 
-export async function login(prevState, formData) {
+import { createClient } from "../../../../src/utils/supabase/server"
+
+export async function login(formData) {
   const supabase = createClient();
-  // type-casting here for convenience
-  // in practice, you should validate your inputs  
+
   const data = {
-    email: formData.get("email"),
-    password: formData.get("password"),
+    email: formData.email,
+    password: formData.password,
   };
+
   try {
     const { error } = await supabase.auth.signInWithPassword(data);
     if (error) {
       throw error;
     }
-    console.log("actived");
-    return {
-      message: "success",
-      errors: undefined,
-      fieldValues: {
-        email: "",
-        password: "",
-      },
-    };
+    return { message: "success", error: null }
   } catch (error) {
-    return {
-      message: "error",
-      errors: error.message,
-      fieldValues: {
-        email: data.email,
-        password: data.password,
-      },
-    };
+    return { message: "error", error: error.message };
   }
 }
