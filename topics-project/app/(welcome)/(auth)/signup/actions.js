@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { createClient } from "../../../../src/utils/supabase/server";
 
 export async function signup(formData) {
@@ -14,22 +13,15 @@ export async function signup(formData) {
         name: formData.name,
         height: formData.height,
         weight: formData.weight,
-        goal: formData.goal
-      }
-    }
-
+        goal: formData.goal,
+      },
+    },
   };
 
-  try {
-    const { error } = await supabase.auth.signUp(data);
-    if (error) {
-      throw error;
-    }
-    const { data: { user } } = await supabase.auth.getUser();
-    return user;
-
-  } catch (error) {
-    console.log(error);
-    redirect("/error");
+  const { error } = await supabase.auth.signUp(data);
+  if (error) {
+    throw error;
   }
+  const { data: { user } } = await supabase.auth.getUser();
+  return user;
 }
