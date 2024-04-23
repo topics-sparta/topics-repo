@@ -27,7 +27,7 @@ export const Macros = ({
                     >
                       <div className="absolute top-0 left-0 right-0">
                         <div className="h-10 md:h-14 w-full rounded-full border-4 md:border-[5px] border-customSecondary bg-customPrimary flex justify-center items-center">
-                          <p className="text-customAccent text-xs md:text-sm font-bold font-poppins">
+                          <p className="text-customAccent text-sm md:text-lg font-bold font-poppins">
                             {protein}
                           </p>
                         </div>
@@ -52,7 +52,7 @@ export const Macros = ({
                     >
                       <div className="absolute top-0 left-0 right-0">
                         <div className="h-10 md:h-14 w-full rounded-full border-4 md:border-[5px] border-customSecondary bg-customPrimary flex justify-center items-center">
-                          <p className="text-customAccent text-xs md:text-sm font-bold font-poppins">
+                          <p className="text-customAccent text-sm md:text-lg font-bold font-poppins">
                             {fat}
                           </p>
                         </div>
@@ -77,7 +77,7 @@ export const Macros = ({
                     >
                       <div className="absolute top-0 left-0 right-0">
                         <div className="h-10 md:h-14 w-full rounded-full border-4 md:border-[5px] border-customSecondary bg-customPrimary flex justify-center items-center">
-                          <p className="text-customAccent text-xs md:text-sm font-bold font-poppins">
+                          <p className="text-customAccent text-sm md:text-lg font-bold font-poppins">
                             {carbs}
                           </p>
                         </div>
