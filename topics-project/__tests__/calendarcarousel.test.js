@@ -6,9 +6,11 @@ import { CalendarCarousel } from '../app/(main)/home/_components/calendarcarouse
 import { format, addDays, startOfToday } from 'date-fns';
 
 describe('CalendarCarousel Component', () => {
+  const mockOnDateChange = jest.fn();
+
   // Test rendering of the component
   it('renders correctly and displays current week', () => {
-    render(<CalendarCarousel />);
+    render(<CalendarCarousel onDateChange={mockOnDateChange} />);
     const today = startOfToday();
     const dates = Array.from({ length: 7 }, (_, i) => addDays(today, i - 3));
     dates.forEach(date => {
@@ -19,7 +21,7 @@ describe('CalendarCarousel Component', () => {
 
   // Test that future dates are not selectable
   it('does not allow selecting a future date', () => {
-    render(<CalendarCarousel />);
+    render(<CalendarCarousel onDateChange={mockOnDateChange} />);
     const futureDate = addDays(startOfToday(), 1);
     const futureDateElement = screen.getByText(format(futureDate, 'd')).closest('div');
     fireEvent.click(futureDateElement);
@@ -28,10 +30,11 @@ describe('CalendarCarousel Component', () => {
 
   // Test that past dates are selectable
   it('allows selecting a past date', () => {
-    render(<CalendarCarousel />);
+    render(<CalendarCarousel onDateChange={mockOnDateChange} />);
     const pastDate = addDays(startOfToday(), -1);
     const pastDateElement = screen.getByText(format(pastDate, 'd')).closest('div');
     fireEvent.click(pastDateElement);
     expect(pastDateElement).toHaveClass('font-bold');
+    expect(mockOnDateChange).toHaveBeenCalledWith(pastDate); 
   });
 });

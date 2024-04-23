@@ -3,6 +3,8 @@
 
 import { useState, useEffect } from 'react';
 
+
+
 export const useFetchMetrics = (userID) => {
   const [calories, setCalories] = useState(0);
   const [protein, setProtein] = useState(0);
@@ -41,6 +43,7 @@ export const useFetchUserInfo = (userID) => {
   const [proteinGoal, setProteinGoal] = useState(0);
   const [fatGoal, setFatGoal] = useState(0);
   const [carbsGoal, setCarbsGoal] = useState(0);
+  const [userName, setuserName] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -55,6 +58,7 @@ export const useFetchUserInfo = (userID) => {
           setProteinGoal(data.users.daily_protein_goal);
           setFatGoal(data.users.daily_fat_goal);
           setCarbsGoal(data.users.daily_carb_goal);
+          setuserName(data.users.username);
         }
       })
       .catch(error => {
@@ -66,7 +70,38 @@ export const useFetchUserInfo = (userID) => {
       });
   }, [userID]);
 
-  return { calorieGoal, proteinGoal, fatGoal, carbsGoal, loading, error };
+  return { calorieGoal, proteinGoal, fatGoal, carbsGoal, userName, loading, error };
 };
+
+export const useFetchNutritionByDate = (userID, date) => {
+  const [nutritionEntries, setNutritionEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    fetch(`/api/fetch-nutrition-via-date/${userID}/${date}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          setError(data.error);
+        } else {
+          const entries = data.data_by_date.map(entry => ({
+            foodName: entry.food_name, 
+            calories: entry.calories    
+          }));
+          setNutritionEntries(entries);
+        }
+      })
+      .catch(error => {
+        setError('Failed to fetch data');
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [userID, date]); 
+  return { nutritionEntries, loading, error };
+};
+
 
 
