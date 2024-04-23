@@ -51,8 +51,6 @@ test("page successfully updates user", async ({ page }) => {
   const randomGoal = goalArray[randomIndex]; // unable to test goal
   // unable to test goal because i cat figure out how to get the value of the button after it changes
 
-  console.log(randomWeight, randomHeight);
-
   // updating values
   await page.locator('input[name="weight"]').fill(randomWeight.toString());
   await page.locator('input[name="height"]').fill(randomHeight.toString());
