@@ -10,7 +10,7 @@ export const Macros = ({
     <div className="bg-customSecondary/25 rounded-2xl w-6/12 p-3 md:p-4 h-52 md:h-72 max-w-72">
       <div className="h-full w-full">
         <div className="grid grid-rows-6 grid-cols-1 h-full w-full">
-          <h1 className="text-lg font-semibold font-poppins text-customAccent text-start md:text-2xl h-10 row-span-1 col-span-1">
+          <h1 className="text-lg font-semibold font-poppins text-customAccent text-start md:text-2xl row-span-1 col-span-1">
             Macros
             <span className="text-xs pl-2">(grams)</span>
           </h1>
