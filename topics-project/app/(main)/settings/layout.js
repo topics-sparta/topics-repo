@@ -9,7 +9,7 @@ export default function Layout({ children }) {
             <Navbar />
             <NavbarDropDown />
         </div>
-        <div className="w-full h-[calc(100vh - 10rem)]">{children}</div>
+        <div className="w-full md:h-[calc(100vh-10rem)]">{children}</div>
     </div>
   );
 }
