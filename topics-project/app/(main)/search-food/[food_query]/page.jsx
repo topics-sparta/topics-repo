@@ -14,7 +14,6 @@ function FoodResults() {
   const [food_result, setFoods] = useState();
 
   const goToFoodItem = () => {
-    router.push("/foodItem");
     console.log("go to food item details"); // go to food item and either fetch by id, or pass in props
   };
 
