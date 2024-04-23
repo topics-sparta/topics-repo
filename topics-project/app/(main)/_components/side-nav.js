@@ -25,7 +25,7 @@ export default function SideNav({ router, pathName }) {
             </p>
             <div className={clsx("absolute h-5/6 w-0.5 rounded-full right-0 bg-customAccent transition-all duration-300", pathName.startsWith("/diary") ? "translate-x-0" : "translate-x-2 group-hover:translate-x-0")}></div>
           </div>
-          <div className={clsx("group relative hover:text-customAccent flex items-center justify-start gap-3 font-redHatText w-full cursor-pointer pl-4 overflow-hidden", pathName.startsWith("/addFood") ? "text-customAccent" : "text-customSecondary")} onClick={() => console.log("Need to put route to addFood when created")}>
+          <div className={clsx("group relative hover:text-customAccent flex items-center justify-start gap-3 font-redHatText w-full cursor-pointer pl-4 overflow-hidden", pathName.startsWith("/addFood") ? "text-customAccent" : "text-customSecondary")} onClick={() => router.push("/search-food")}>
             <div className="w-11 h-11 bg-customPrimary rounded-full flex items-center justify-center">
               <Plus className="h-5 transition-colors duration-300" />
             </div>

@@ -41,7 +41,7 @@ function FoodResults() {
   return (
     <div className="flex flex-col items-center-justify-center space-y-3">
       <h1 className="font-bold text-[50px]"> Results for : {title_food} </h1>
-      {food_result.length === 0 && <h1>No Foods Found</h1>}
+      {food_result?.length === 0 && <h1>No Foods Found</h1>}
       {loading ? (
         <div className="w-full h-screen flex bg-customSecondary/25 justify-center items-center">
           <Loader className="w-10 h-10 animate-spin text-customSecondary" />
