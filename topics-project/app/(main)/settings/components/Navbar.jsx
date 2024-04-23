@@ -17,8 +17,8 @@ function Navbar() {
               key={item}
               className="cursor-pointer row-span-1 col-span-1 w-full h-full flex justify-center items-center"
             >
-              <div className={clsx("w-fit h-full rounded p-2 px-4", current ? "bg-customSecondary/15" : "")}>
-                <p className={clsx("font-medium font-redHatText", current ? "text-customSecondary" : "text-customAccent/60")}>
+              <div className={clsx("w-fit h-full rounded-md p-2 px-4", current ? "bg-customSecondary/15" : "")}>
+                <p className={clsx("font-medium font-redHatText transition-colors", current ? "text-customSecondary" : "text-customAccent/60 hover:text-customSecondary")}>
                   {item}
                 </p>
               </div>
