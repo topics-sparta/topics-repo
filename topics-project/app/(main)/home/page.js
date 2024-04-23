@@ -1,23 +1,61 @@
 "use client";
+import React, { useState, useEffect } from 'react';
 import { Food } from "./_components/food";
 import { CalendarCarousel } from "./_components/calendarcarousel";
 import { CalendarSearch } from "lucide-react";
-import { useFetchMetrics, useFetchUserInfo } from "./action";
+import { useFetchMetrics, useFetchUserInfo, useFetchNutritionByDate } from "./action";
 import Macros from "./_components/macros";
 import { Calories } from "./_components/calories";
-import { useMediaQuery } from "usehooks-ts";
+import { createClient } from "@/utils/supabase/client";
+import { format } from 'date-fns';
 
 export default function HomePage() {
-  {
-    /* take array / storage from action . js and map to the food component (adjust UI of food component as well) */
-  }
-  const name = "Johan";
-  const userID = "65567f92-7a4e-4d12-b1dc-1c4e2dd7343f";
-  const { calories, fat, carbs, protein, loading, error } =
-    useFetchMetrics(userID);
-  const { calorieGoal, proteinGoal, fatGoal, carbsGoal } = useFetchUserInfo(userID);
-  const mobile = useMediaQuery('(max-width: 768px)');
+  const supabase = createClient();
 
+  const [userID, setUserID] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  useEffect(() => {
+    const getUserID = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error("Error fetching user:", error.message);
+      } else {
+        setUserID(data.user.id);
+      }
+    };
+    getUserID();
+  }, []);
+
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate); 
+  };
+
+  const carouseldate = format(selectedDate, 'MM-dd-yyyy');
+    
+  const { calories, fat, carbs, protein, loading, error } = useFetchMetrics(userID);
+  const { calorieGoal, proteinGoal, fatGoal, carbsGoal, userName } = useFetchUserInfo(userID);
+
+  const NutritionList = () => {
+  const { nutritionEntries, loading, error } = useFetchNutritionByDate(userID, carouseldate);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  return (
+    <div className="flex flex-wrap gap-4">
+      {nutritionEntries.map((entry, index) => (
+        <Food
+          key={index}
+          foodName={entry.foodName}
+          mealType="Unknown" 
+          quantity={1} 
+          kcals={entry.calories}
+        />
+      ))}
+    </div>
+  );  
+};
   function getFormattedDate() {
     const daysOfWeek = [
       "SUNDAY",
@@ -63,7 +101,7 @@ export default function HomePage() {
               <div>
                 <h1 className="greeting text-3xl font-poppins">
                   <span className="font-normal">Hello, </span>
-                  <span class="text-3xl font-bold">{name}</span>
+                  <span class="text-3xl font-bold">{userName}</span>
                 </h1>
                 <p class="text-customAccent/50">{formattedDate}</p>
               </div>
@@ -74,9 +112,9 @@ export default function HomePage() {
             </div>
           </div>
           <div class="flex items-center justify-center">
-            <CalendarCarousel />
+            <CalendarCarousel onDateChange={handleDateChange} />
           </div>
-          <div class="flex flex-row justify-between w-full gap-2">
+          <div className="flex flex-row justify-between w-full gap-2">
             <Calories calories={calories} calorieGoal={calorieGoal} />
             <Macros
               protein={protein}
@@ -91,12 +129,7 @@ export default function HomePage() {
             <h1 class="text-2xl font-semibold text-amber-950 text-start">
               Activity
             </h1>
-            <Food
-              foodName="Eggs"
-              mealType="Breakfast"
-              quantity={4}
-              kcals={320}
-            />
+            <NutritionList />
           </div>
         </div>
       </div>

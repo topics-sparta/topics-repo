@@ -1,31 +1,11 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { createClient } from "../../../../src/utils/supabase/server";
-
-const insertDataInUserTable = async (id, formData) => {
-  try {
-    const supabase = createClient();
-
-    const { data, error } = await supabase.from("users").insert({
-      username: formData.name,
-      height: formData.height,
-      weight: formData.weight,
-      goal: formData.goal,
-      uuid: id,
-    });
-    if (error) {
-      console.log(error);
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export async function signup(formData) {
   const supabase = createClient();
 
-  const data_ = {
+  const data = {
     email: formData.email,
     password: formData.password,
     options: {
@@ -38,21 +18,10 @@ export async function signup(formData) {
     },
   };
 
-  try {
-    const { data, error } = await supabase.auth.signUp(data_);
-    if (error) {
-      throw error;
-    }
-
-    insertDataInUserTable(data.user.id, formData);
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    return user;
-  } catch (error) {
-    console.log(error);
-    redirect("/error");
+  const { error } = await supabase.auth.signUp(data);
+  if (error) {
+    throw error;
   }
+  const { data: { user } } = await supabase.auth.getUser();
+  return user;
 }
