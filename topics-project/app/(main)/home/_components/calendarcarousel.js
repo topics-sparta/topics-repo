@@ -33,8 +33,8 @@ export const CalendarCarousel = () => {
   };
 
   return (
-    <div className="max-w-full w-full lg:mx-auto">
-      <div className="w-full grid grid-cols-7">
+    <div className="max-w-full w-full flex justify-center items-center lg:mx-auto">
+      <div className="w-full lg:w-9/12 grid grid-cols-7">
         {dates.map(renderDateBlock)}
       </div>
     </div>

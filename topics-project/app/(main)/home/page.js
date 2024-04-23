@@ -75,12 +75,13 @@ export default function HomePage() {
         <div class="flex items-center justify-center">
           <CalendarCarousel />
         </div>
-        <div class="flex flex-row justify-around w-full">
+        <div class="flex flex-row justify-between w-full gap-2">
+          {/* Put the Calories component below as an actual component */}
           <div
-            className="bg-customAccent/10 rounded-lg shadow-lg w-6/12 h-fit p-2 max-w-52 flex flex-col justify-between"
+            className="bg-customAccent/10 rounded-lg shadow-lg w-6/12 h-fit p-2 max-w-72 flex flex-col justify-between"
           >
             <h1
-              className="text-base font-semibold font-poppins text-customAccent text-start md:text-lg"
+              className="text-lg font-semibold font-poppins text-customAccent text-start md:text-xl"
             >
               Calories
             </h1>
@@ -116,7 +117,6 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
           <Macros protein={protein} fat={fat} carbs={carbs} proteinGoal={proteinGoal} fatGoal={fatGoal} carbGoal={carbsGoal}/>
         </div>
         <div class="flex flex-col gap-4">
