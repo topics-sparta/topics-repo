@@ -1,18 +1,22 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Food } from "./_components/food";
 import { CalendarCarousel } from "./_components/calendarcarousel";
-import { CalendarSearch } from "lucide-react";
-import { useFetchMetrics, useFetchUserInfo, useFetchNutritionByDate } from "./action";
+import { CalendarSearch, Loader } from "lucide-react";
+import {
+  useFetchMetrics,
+  useFetchUserInfo,
+  useFetchNutritionByDate,
+} from "./action";
 import Macros from "./_components/macros";
 import { Calories } from "./_components/calories";
 import { createClient } from "@/utils/supabase/client";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 export default function HomePage() {
   const supabase = createClient();
 
-  const [userID, setUserID] = useState('');
+  const [userID, setUserID] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
@@ -28,34 +32,44 @@ export default function HomePage() {
   }, []);
 
   const handleDateChange = (newDate) => {
-    setSelectedDate(newDate); 
+    setSelectedDate(newDate);
   };
 
-  const carouseldate = format(selectedDate, 'MM-dd-yyyy');
-    
-  const { calories, fat, carbs, protein, loading, error } = useFetchMetrics(userID);
-  const { calorieGoal, proteinGoal, fatGoal, carbsGoal, userName } = useFetchUserInfo(userID);
+  const carouseldate = format(selectedDate, "MM-dd-yyyy");
+
+  const { calories, fat, carbs, protein, loading, error } =
+    useFetchMetrics(userID);
+  const { calorieGoal, proteinGoal, fatGoal, carbsGoal, userName } =
+    useFetchUserInfo(userID);
 
   const NutritionList = () => {
-  const { nutritionEntries, loading, error } = useFetchNutritionByDate(userID, carouseldate);
+    const { nutritionEntries, loading, error } = useFetchNutritionByDate(
+      userID,
+      carouseldate
+    );
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+    if (loading)
+      return (
+        <div className="w-full h-full min-h-20 flex justify-center items-center">
+          <Loader className="w-8 h-8 animate-spin text-customSecondary" />
+        </div>
+      );
+    if (error) return <p>Error: {error}</p>;
 
-  return (
-    <div className="flex flex-wrap gap-4">
-      {nutritionEntries.map((entry, index) => (
-        <Food
-          key={index}
-          foodName={entry.foodName}
-          mealType="Unknown" 
-          quantity={1} 
-          kcals={entry.calories}
-        />
-      ))}
-    </div>
-  );  
-};
+    return (
+      <div className="flex flex-wrap gap-4">
+        {nutritionEntries.length == 0 ? <div className="h-full w-full min-h-20"><p className="font-redHatText font-medium text-customAccent/60">You do not have any foods logged today.</p></div> : nutritionEntries.map((entry, index) => (
+          <Food
+            key={index}
+            foodName={entry.foodName}
+            mealType="Unknown"
+            quantity={1}
+            kcals={entry.calories}
+          />
+        ))}
+      </div>
+    );
+  };
   function getFormattedDate() {
     const daysOfWeek = [
       "SUNDAY",
