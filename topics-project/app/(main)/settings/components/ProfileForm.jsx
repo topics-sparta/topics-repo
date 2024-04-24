@@ -102,9 +102,9 @@ function ProfileForm({ currentUser }) {
           </div>
           <hr className="h-0.5 bg-customAccent/10 w-full" />
           <div className="flex flex-col md:justify-start justify-center md:items-start items-center w-full">
-            <p className="font-redHatText font-bold text-xl text-customAccent">
+            <h1 className="font-redHatText font-bold text-xl text-customAccent">
               Goal
-            </p>
+            </h1>
             <DropDownTW
               formData={formData}
               handleFormChange={handleFormChange}
