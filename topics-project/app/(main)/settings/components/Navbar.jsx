@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 function Navbar() {
   const pathname = usePathname();
-  const items_list = ["Profile", "Account", "Themes", "Helps"];
+  const items_list = ["Profile", "Account", "Themes", "Help"];
 
   return (
     <div className="hidden md:flex items-center justify-center mt-4 h-full md:w-6/12 xl:w-4/12 2xl:w-3/12">

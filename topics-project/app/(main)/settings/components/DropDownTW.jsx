@@ -77,23 +77,6 @@ export default function DropDownTW({ formData, handleFormChange, goalOnInit }) {
                 <a
                   href="#"
                   onClick={() => {
-                    setSelected("Power Lifting");
-                    formData.goal = "Power Lifting";
-                  }}
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Power Lifting
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  onClick={() => {
                     setSelected("Maintenance");
                     formData.goal = "Maintenance";
                   }}
