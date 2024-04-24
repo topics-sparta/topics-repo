@@ -1,4 +1,5 @@
 "use client";
+import inchesToFeetInches from "../../../../helper/heightConversion";
 
 export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
   return (
@@ -101,9 +102,3 @@ export const MetricsForm = ({ formData, handleInputChange, handleSubmit }) => {
     </div>
   );
 };
-
-function inchesToFeetInches(inches) {
-  const feet = Math.floor(inches / 12);
-  const remainingInches = inches % 12;
-  return `${feet}' ${remainingInches}"`;
-}

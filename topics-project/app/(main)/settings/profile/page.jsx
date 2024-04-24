@@ -3,6 +3,7 @@ import ProfileForm from "../components/ProfileForm";
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
 
 function Profile() {
   const [currentUser, setCurrentUser] = useState("");
@@ -40,8 +41,8 @@ function Profile() {
     getCurrentUser();
   }, []);
   return (
-    <div className="w-full bg-[#FFF7ED] h-full flex flex-col items-center ">
-      {loading ? <div>loading</div> : <ProfileForm currentUser={currentUser} />}
+    <div className="w-full bg-customPrimary h-full flex flex-col items-center">
+      {loading ? <div className="w-full h-full flex justify-center items-center"><Loader className="w-8 h-8 animate-spin text-customSecondary" /></div> : <ProfileForm currentUser={currentUser} />}
     </div>
   );
 }

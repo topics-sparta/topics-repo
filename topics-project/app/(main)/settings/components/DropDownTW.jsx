@@ -6,11 +6,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// Losing Weight
-// Gaining Muscle
-// Power Lifting
-// Maintenance
-
 export default function DropDownTW({ formData, handleFormChange, goalOnInit }) {
   const [selected, setSelected] = useState("");
 
@@ -21,8 +16,8 @@ export default function DropDownTW({ formData, handleFormChange, goalOnInit }) {
   return (
     <Menu as="div" className="relative inline-block text-left w-[200px] mt-2  ">
       <div>
-        <Menu.Button className="inline-flex w-full justify-start pl-3 gap-x-1.5 rounded-md bg-white px-2 py-1 text-sm  font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 border-[#4C220A]  border-2  hover:bg-gray-50">
-          <div className="flex items-center justify-between w-full">
+        <Menu.Button className="inline-flex w-full justify-start p-2 rounded-md bg-white border-customAccent border-2 hover:bg-gray-50">
+          <div className="flex items-center justify-between w-full text-sm font-semibold text-customAccent font-redHatText">
             {selected}
             <ChevronDownIcon
               className="-mr-1 h-6 w-6 text-[#4C220A]"
@@ -41,8 +36,8 @@ export default function DropDownTW({ formData, handleFormChange, goalOnInit }) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1 border-2 border-customAccent rounded-md">
             <Menu.Item>
               {({ active }) => (
                 <a
@@ -74,23 +69,6 @@ export default function DropDownTW({ formData, handleFormChange, goalOnInit }) {
                   )}
                 >
                   Gaining Muscle
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  onClick={() => {
-                    setSelected("Power Lifting");
-                    formData.goal = "Power Lifting";
-                  }}
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Power Lifting
                 </a>
               )}
             </Menu.Item>

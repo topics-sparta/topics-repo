@@ -25,7 +25,7 @@ export default function NavbarDropDown() {
   return (
     <Menu
       as="div"
-      className=" md:hidden flex relative inline-block text-left w-full items-center justify-center mt-5 "
+      className=" md:hidden flex relative text-left w-fit items-center justify-center"
     >
       <div>
         <Menu.Button className="inline-flex w-full justify-start pl-3 gap-x-1.5 rounded-md bg-white px-2 py-1 text-sm  font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 border-[#4C220A]  border-2  hover:bg-gray-50">
