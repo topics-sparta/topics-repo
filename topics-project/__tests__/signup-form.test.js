@@ -6,7 +6,6 @@ import Signup from '../app/(welcome)/(auth)/signup/page'
 import { InfoForm } from '../app/(welcome)/(auth)/signup/_components/infoForm'
 import { MetricsForm } from '../app/(welcome)/(auth)/signup/_components/metricsForm'
 import * as actions from '../app/(welcome)/(auth)/signup/actions'
-import { expect } from '@playwright/test';
 
 jest.mock('../app/(welcome)/(auth)/signup/actions')
 

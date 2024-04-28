@@ -1,6 +1,3 @@
-
-
-import { expect } from "@playwright/test";
 import { GET } from "../app/api/get-food-info/route";
 
 describe("GET request to USDA API", () => {
