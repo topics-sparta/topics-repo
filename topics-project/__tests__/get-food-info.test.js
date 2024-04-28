@@ -22,8 +22,6 @@ describe("GET request to USDA API", () => {
     }
     const response = await GET(request);
     const data = await response.json();
-    console.log(response);
-    console.log(data);
     expect(response.status).toBe(200);
     expect(data).toEqual(expectedData);
   });
