@@ -54,7 +54,7 @@ test("recieves food name from user and shows retults in [food_query] directory",
   );
 });
 
-test("recieves and INCORRECT food from user and shows retults in [food_query] directory", async ({
+test("recieves and INCORRECT food from user and shows no foods found", async ({
   page,
 }) => {
   await page.goto("http://localhost:3000/login");
@@ -63,7 +63,11 @@ test("recieves and INCORRECT food from user and shows retults in [food_query] di
   await page.getByPlaceholder("Enter email").press("Tab");
   await page.getByPlaceholder("Enter password").fill("password");
   await page.getByPlaceholder("Enter password").press("Enter");
-  await page.getByText("Add Food").click();
+  await page
+    .locator("div")
+    .filter({ hasText: /^Add Food$/ })
+    .click();
+  await page.getByPlaceholder("Search for any foods...").click();
   await page.getByPlaceholder("Search for any foods...").click();
   await page.getByPlaceholder("Search for any foods...").fill("sfsdadasDFSF");
   await page.getByPlaceholder("Search for any foods...").press("Enter");
@@ -74,6 +78,7 @@ test("recieves and INCORRECT food from user and shows retults in [food_query] di
     "sfsdadasDFSF"
   );
 
+  await expect(page.locator(".md\\:w-\\[900px\\] > div").first()).toBeHidden();
   await expect(
     page.getByRole("heading", { name: "No Foods Found" })
   ).toBeVisible();
