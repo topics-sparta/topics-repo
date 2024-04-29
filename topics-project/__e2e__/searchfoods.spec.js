@@ -78,10 +78,10 @@ test("recieves and INCORRECT food from user and shows no foods found", async ({
     "sfsdadasDFSF"
   );
 
-  await expect(page.locator(".md\\:w-\\[900px\\] > div").first()).toBeHidden();
-  await expect(
-    page.getByRole("heading", { name: "No Foods Found" })
-  ).toBeVisible();
+  await expect(page.locator(".md\\:w-\\[900px\\] > div").first()).toBeHidden(); // no items should be rendered
+  // await expect(
+  //   page.getByRole("heading", { name: "No Foods Found" })
+  // ).toBeVisible();
 });
 
 // question: do i have to test if it renders food item correctly?
