@@ -24,7 +24,6 @@ function FoodResults() {
       const data = await res.json();
       const { food_data, status } = data;
       setFoods(food_data);
-      console.log(food_data[0]);
       setLoading(false);
     }
   };
@@ -47,6 +46,7 @@ function FoodResults() {
         </div>
       ) : (
         <div>
+          <h1 className="">Foods Found</h1>
           {food_result?.map((item) => {
             return (
               <div

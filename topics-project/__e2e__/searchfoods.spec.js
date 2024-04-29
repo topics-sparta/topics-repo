@@ -1,3 +1,5 @@
+// @ts-check
+
 import { test, expect } from "@playwright/test";
 
 test("component renders correctly", async ({ page }) => {
