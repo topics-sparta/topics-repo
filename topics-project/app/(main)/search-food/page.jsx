@@ -7,7 +7,7 @@ function SearchFood() {
   const router = useRouter();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchValue)
+    console.log(searchValue);
     router.push(`/search-food/${searchValue}`);
   };
   return (
