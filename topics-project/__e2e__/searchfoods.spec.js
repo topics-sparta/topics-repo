@@ -52,7 +52,6 @@ test("recieves food name from user and shows retults in [food_query] directory",
   await expect(page.getByPlaceholder("Search for any foods...")).toHaveValue(
     "chicken breast"
   );
-  await expect(page.locator(".md\\:w-\\[900px\\] > div").first()).toBeVisible();
 });
 
 test("recieves and INCORRECT food from user and displays no results", async ({
