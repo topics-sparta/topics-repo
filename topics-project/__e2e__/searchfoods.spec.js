@@ -52,9 +52,10 @@ test("recieves food name from user and shows retults in [food_query] directory",
   await expect(page.getByPlaceholder("Search for any foods...")).toHaveValue(
     "chicken breast"
   );
+  await expect(page.locator(".md\\:w-\\[900px\\] > div").first()).toBeVisible();
 });
 
-test("recieves and INCORRECT food from user and shows no foods found", async ({
+test("recieves and INCORRECT food from user and displays no results", async ({
   page,
 }) => {
   await page.goto("http://localhost:3000/login");
@@ -78,10 +79,5 @@ test("recieves and INCORRECT food from user and shows no foods found", async ({
     "sfsdadasDFSF"
   );
 
-  await expect(page.locator(".md\\:w-\\[900px\\] > div").first()).toBeHidden(); // no items should be rendered
-  // await expect(
-  //   page.getByRole("heading", { name: "No Foods Found" })
-  // ).toBeVisible();
+  await expect(page.locator(".md\\:w-\\[900px\\] > div").first()).toBeHidden(); // no items should
 });
-
-// question: do i have to test if it renders food item correctly?

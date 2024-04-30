@@ -43,7 +43,7 @@ function FoodResults() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center-justify-center space-y-3 w-full bg-customPrimary">
+    <div className="flex flex-col items-center-justify-center space-y-3 w-full h-screen bg-customPrimary">
       {loading ? (
         <div className="w-full h-screen flex bg-customSecondary/25 justify-center items-center">
           <Loader className="w-10 h-10 animate-spin text-customSecondary" />

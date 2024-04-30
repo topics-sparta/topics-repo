@@ -15,8 +15,6 @@ export async function GET(request, context) {
     for (const food of foods) {
       let nutrients = getfoodNutrients(food.foodNutrients); // grabs all the nutrients
 
-      // console.log(food.packageWeight);
-
       // creates object and pushes it to food_result
       food_result.push({
         brand_Owner: food.brandOwner,
