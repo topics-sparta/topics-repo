@@ -1,15 +1,30 @@
-import React from "react";
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function SearchFood() {
+  const [searchValue, setSearchValue] = useState();
+  const router = useRouter();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(searchValue);
+    router.push(`/search-food/${searchValue}`);
+  };
   return (
     <div className="w-full h-full bg-customPrimary">
       <div className="flex items-center justify-center flex-col md:pt-20 pt-10 ">
         {/* for input */}
         <div>
-          <input
-            className="w-[347px]  md:w-[650px] h-[60px] text-[24px] text-[#FFF7ED] placeholder-[#FFF7ED] bg-[#D79C59] rounded-[999px] px-10 outline-none drop-shadow-2xl "
-            placeholder="Search for any foods..."
-          />
+          <form onSubmit={handleSubmit}>
+            <input
+              className="w-[347px]  md:w-[650px] h-[60px] text-[24px] text-[#FFF7ED] placeholder-[#FFF7ED] bg-[#D79C59] rounded-[999px] px-10 outline-none drop-shadow-2xl "
+              placeholder="Search for any foods..."
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+            />
+          </form>
         </div>
         {/* for input */}
 

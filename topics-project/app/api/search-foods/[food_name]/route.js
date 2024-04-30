@@ -18,6 +18,7 @@ export async function GET(request, context) {
       // creates object and pushes it to food_result
       food_result.push({
         brand_Owner: food.brandOwner,
+        weight: food.packageWeight,
         brand_name: food.brandName,
         serving_size: food.servingSize,
         unit_name: food.unitName,
