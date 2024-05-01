@@ -1,3 +1,5 @@
+
+
 export async function GET(request) {
   const barcode = request.nextUrl.searchParams.get("barcode");
   const key = process.env.FDC_API_KEY;
@@ -39,6 +41,6 @@ export async function GET(request) {
     return new Response(JSON.stringify(foodInfo), { status: 200 });
 
   } catch (error) {
-    return new Response({ error: error }, { status: 500 });
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 }
