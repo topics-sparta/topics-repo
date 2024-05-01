@@ -1,8 +1,8 @@
-import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
-import { Navbar } from "./components/navbar";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Suspense } from "react";
+import Loading from "./components/loading";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,10 +12,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={"flex flex-col"}>
-        {/* TO DO: For Desktop Dashboard, switch navbar with side-nav */}
-        <Navbar />
-        {children}
+      <body>
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

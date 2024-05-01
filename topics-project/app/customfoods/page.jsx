@@ -69,13 +69,13 @@ export default function CustomFoodForm() {
           Add Custom Food
         </h1>{" "}
         {/* Responsive text size */}
-        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col space-y-4">
           <label className="text-[18px] text-[#4C220A]" htmlFor="food_name">
             Food Name:
           </label>
           <input
             className="border-2 border-[#4C220A] p-2 rounded"
-            placeholder="Enter the calorie amount (Kcal)"
+            placeholder="Enter the meal's name"
             id="food_name"
             name="food_name"
             type="text"
@@ -138,14 +138,10 @@ export default function CustomFoodForm() {
           />
           <button
             className="bg-[#D79C59] text-[#FFF7ED] py-2 px-4 sm:py-3 sm:px-6 rounded font-semibold mt-4"
-            type="submit"
+            formAction={handleSubmit}
           >
             ADD FOOD
           </button>
-          {errorMessage && <p>{errorMessage}</p>}
-          {successMessage && (
-            <p className="success-alert text-green-600">{successMessage}</p>
-          )}
         </form>
       </div>
     </div>

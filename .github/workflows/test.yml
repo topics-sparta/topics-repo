@@ -6,6 +6,48 @@ on:
     branches: [main]
 
 jobs:
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./topics-project
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.2.0
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Tests
+        run: npm test
+  run-e2e-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./topics-project
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.2.0
+      - name: Install Dependencies
+        run: npm install
+      - name: install playwright browsers
+        run: npx playwright install --with-deps
+      - name: Build Application
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
+      - name: Run Tests
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: npx playwright test
   build:
     runs-on: ubuntu-latest
     steps:
@@ -20,35 +62,3 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  all-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.2.0
-
-      - name: Install Dependencies
-        run: npm i --prefix topics-project
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Build Application
-        run: npm run build --prefix topics-project
-
-      - name: Run unit and integration tests
-        run: npm run test --prefix topics-project
-
-      - name: Generate Code Coverage Report
-        run: npm run test --prefix topics-project -- --coverage
-
-      - name: Run e2e Tests
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
-        working-directory: topics-project
-        run: npx playwright test
