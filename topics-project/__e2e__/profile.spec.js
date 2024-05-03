@@ -44,8 +44,8 @@ test("page successfully updates user", async ({ page }) => {
     "Power Lifting",
     "Maintenance",
   ];
-  const randomHeight = Math.floor(Math.random() * 80) + 10;
-  const randomWeight = Math.floor(Math.random() * 600) + 30;
+  const randomHeight = Math.floor(Math.random() * 60) + 24;
+  const randomWeight = Math.floor(Math.random() * 571) + 30;
   const randomIndex = Math.floor(Math.random() * 3);
 
   const randomGoal = goalArray[randomIndex]; // unable to test goal
