@@ -4,18 +4,18 @@ import { createClient } from "/src/utils/supabase/server";
 const supabase = createClient();
 
   // takes our handled form and sends it to SB using a hard coded uuid for now 
-export async function sendData(handledformData) {
+export async function sendData(handledformData , userID) {
     try {
       const { error } = await supabase
       .from("nutrition_log")
       .insert([
         {
-          uuid: "65567f92-7a4e-4d12-b1dc-1c4e2dd7343f",
+          uuid: userID,
           food_name: handledformData.food_name,
-          calories: handledformData.calories,
-          protein: handledformData.protein,
-          fat: handledformData.fat,
-          carbs: handledformData.carbs,
+          calories: handledformData.calories * handledformData.servings,
+          protein: handledformData.protein * handledformData.servings,
+          fat: handledformData.fat * handledformData.servings,
+          carbs: handledformData.carbs * handledformData.servings,
         },
         
       ]);
