@@ -40,7 +40,7 @@ export default async function Layout({ children }) {
   return (
       <div className={"flex relative w-full h-screen"}>
         {isMobile ? <MobileNav router={router} pathName={pathName} /> : <SideNav router={router} pathName={pathName} />}
-        <div className={clsx("relative", isMobile ? "w-[100vw] h-full" : "w-[calc(100vw-176px)] h-full")}>
+        <div className={clsx("relative", isMobile ? "w-[100vw] h-full" : "w-[calc(100vw-176px)] h-full overflow-y-scroll")}>
             {children}
         </div>
       </div>
