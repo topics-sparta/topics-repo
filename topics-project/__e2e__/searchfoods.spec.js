@@ -14,15 +14,15 @@ test("component renders correctly", async ({ page }) => {
   // expect items
 
   await expect(
-    page.locator("div").filter({ hasText: /^Add Custom Food$/ })
+    page.locator("div").filter({ hasText: /^Add Custom Food$/ }).first()
   ).toBeVisible();
 
   await expect(
-    page.locator("div").filter({ hasText: /^Generate Meal$/ })
+    page.locator("div").filter({ hasText: /^Generate Meal$/ }).first()
   ).toBeVisible();
 
   await expect(
-    page.locator("div").filter({ hasText: /^Scan Barcode$/ })
+    page.locator("div").filter({ hasText: /^Scan Barcode$/ }).first()
   ).toBeVisible();
 
   await expect(page.getByPlaceholder("Search for any foods...")).toBeVisible();
