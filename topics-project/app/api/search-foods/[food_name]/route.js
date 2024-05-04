@@ -24,6 +24,7 @@ export async function GET(request, context) {
         unit_name: food.unitName,
         description: food.description,
         nutrients: nutrients,
+        fdcID: food.fdcId
       });
     }
 

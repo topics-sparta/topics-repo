@@ -5,7 +5,7 @@ function IndividualFoodItem({ item }) {
   const router = useRouter();
   let calories = 0;
 
-  let { description, brand_Owner, brand_name, weight } = item;
+  let { description, brand_Owner, brand_name, weight, fdcID } = item;
 
   const toTitleCase = (text) => {
     description = description
@@ -20,8 +20,6 @@ function IndividualFoodItem({ item }) {
   let weightInG = weight?.split("/")[1];
   let wieghtInOz = weight?.split("/")[0];
 
-  console.log(weightInG, wieghtInOz);
-
   // getting calories helper
   const gettingCalories = () => {
     for (item of item.nutrients) {
@@ -33,10 +31,13 @@ function IndividualFoodItem({ item }) {
 
   gettingCalories();
   toTitleCase();
-  // splittingWeight();
+
+  const handleClick = () => {
+    router.push(`/foodItem?barcode=${fdcID}`);
+  }
 
   return (
-    <div className="flex w-full justify-between items-center px-4">
+    <div className="flex w-full justify-between items-center px-4 rounded bg-transparent hover:bg-customAccent/5 transition-colors cursor-pointer" onClick={() => handleClick()}>
       {/* div for food name and brand name */}
       <div className="flex flex-col gap-3 py-3">
         <div className="flex items-center gap-4">
