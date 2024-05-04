@@ -13,7 +13,7 @@ export default function FoodItem() {
   const [macros, setMacros] = useState(
     {
       name: "",
-      brand: "",
+      brandName: "",
       servingSize: 0,
       servingSizeUnit: "",
       calories: 0,
@@ -63,7 +63,7 @@ export default function FoodItem() {
                 {macros["name"]}
               </p>
               <div className="w-full lg:gap-4 lg:w-fit flex justify-between items-center text-customAccent/60">
-                <p className="text-base font-bold">{macros["brand"]}</p>
+                <p className="text-base font-bold">{macros["brandName"]}</p>
                 <p className="text-base font-medium">
                   {"Serving Size: " +
                     macros["servingSize"] +
