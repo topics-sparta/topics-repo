@@ -1,0 +1,57 @@
+name: deploy
+
+on:
+  workflow_run:
+    workflows: [test] # Triggered by the test workflow
+    types: [completed] # The test workflow must complete
+    branches: [main] # Only when main is updated
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} # Only when test completed successfully 
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel
+          pip install -r requirements-dev.txt
+          pip install -e .
+      
+      - name: Prepare Application
+        run: |
+          # If any preparation is needed for your application, perform it here
+
+      - name: Build and Upload Artifact
+        run: |
+          # Replace this command with the one to create your deployable artifact
+          zip -r "sparta_deploy-${{ github.sha }}.zip" ./*
+          
+      - name: Upload Application Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sparta_application_artifact
+          path: sparta_deploy-${{ github.sha }}.zip
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.HENRY_GITHUB_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.HENRY_GITHUB_AWS_SECRET_ACCESS_KEY  }}
+          aws-region: "us-west-1" 
+
+      - name: Upload Application File to S3
+        run: aws s3 cp sparta_deploy-${{ github.sha }}.zip s3://terraform-state-sparta-henrysua12
+
+      - name: Create New Application Version
+        run: |  
+          aws elasticbeanstalk create-application-version \
+          --application-name sparta \
+          --source-bundle S3Bucket="sparta",S3Key="sparta_deploy-${{ github.sha }}.zip" \
+          --version-label "ver-${{ github.sha }}" \
+          --description "commit-sha-${{ github.sha }}"
+
+      - name: Deploy Application
+        run: aws elasticbeanstalk update-environment --environment-name sparta-environment --version-label "ver-${{ github.sha }}"
