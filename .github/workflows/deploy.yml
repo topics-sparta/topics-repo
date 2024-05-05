@@ -2,9 +2,10 @@ name: deploy
 
 on:
   workflow_run:
-    workflows: [test] # Triggered by the test workflow
+    workflows: [Test] # Triggered by the test workflow
     types: [completed] # The test workflow must complete
     branches: [main] # Only when main is updated
+    
 
 jobs:
   deploy:
