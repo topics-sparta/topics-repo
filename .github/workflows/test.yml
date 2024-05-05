@@ -21,6 +21,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Run Tests
+        env:
+            FDC_API_KEY: ${{ secrets.FDC_API_KEY }}
         run: npm test
   run-e2e-tests:
     runs-on: ubuntu-latest

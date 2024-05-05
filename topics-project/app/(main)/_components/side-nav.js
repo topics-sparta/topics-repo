@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 export default function SideNav({ router, pathName }) {
   return (
-    <div className="h-full w-44 bg-customSecondary/25 flex">
+    <div className="h-full w-44 bg-customSecondary/25 flex overflow-hidden">
       <div className="flex flex-col items-center w-full my-8">
         <div className="flex flex-col gap-8 w-full h-full">
           <p
