@@ -1,5 +1,5 @@
 resource "aws_elastic_beanstalk_application" "application" {
-    name = "johandelao-sparta"  
+  name = "johandelao-sparta"
 }
 
 resource "aws_elastic_beanstalk_environment" "environment" {
