@@ -1,42 +1,39 @@
-# This workflow will provision the infrastructure necessary to deploy our application.
-
 name: terraform
 
 on:
-    push:
-        branches: [ main ]
-        paths:
-            - 'terraform/*'
-            - '.github/workflows/terraform.yaml'
-    pull_request:
-        branches: [ main ]
-        paths:
-            - 'terraform/*'
-            - '.github/workflows/terraform.yaml'
+  push:
+    branches: [main]
+    paths:
+      - 'terraform/*'
+      - '.github/workflows/terraform.yaml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'terraform/*'
+      - '.github/workflows/terraform.yaml'
+
 jobs:
   format:
     permissions:
       contents: write
     runs-on: ubuntu-latest
-
     name: Format
-    
     steps:
-      # Clone the repository.
-      - uses: actions/checkout@v2
+      - name: Clone the repository
+        uses: actions/checkout@v2
         with:
-          # This is required or we end up in detached head state & thus cannot push any changes.
           ref: ${{ github.head_ref }}
-      # Download & set up the terraform CLI.
-      - name: Set up terraform CLI
+
+      - name: Set up Terraform CLI
         uses: hashicorp/setup-terraform@v1
-      
-      - run: terraform fmt -check
+
+      - name: Check Terraform formatting
+        run: terraform fmt -check
         working-directory: ./terraform
         id: fmt
         continue-on-error: ${{ github.event_name == 'pull_request' }}
-      
-      - name: update pr
+
+      - name: Update pull request
         if: ${{ steps.fmt.outcome == 'failure' && github.event_name == 'pull_request' }}
         run: |
           terraform fmt
@@ -46,42 +43,44 @@ jobs:
           git commit -am "fixup: terraform fmt"
           git push
         working-directory: ./terraform
+
   terraform:
-
     runs-on: ubuntu-latest
-
     name: Validate, Plan, and Apply
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.HENRY_TERRAFORM_AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.HENRY_TERRAFORM_AWS_SECRET_ACCESS_KEY }}
-    
     steps:
       - uses: actions/checkout@v2
-      # Download & set up the terraform CLI.
-      - name: Set up terraform CLI
+
+      - name: Set up Terraform CLI
         uses: hashicorp/setup-terraform@v1
-      # Initialize terraform.
-      - name: terraform init
+
+      - name: Initialize Terraform
         working-directory: ./terraform
         id: init
         run: terraform init -input=false
-      - name: terraform validate
+
+      - name: Validate Terraform configuration
         working-directory: ./terraform
         if: ${{ github.event_name == 'pull_request' }}
         run: terraform validate -no-color
-      - name: terraform plan
+
+      - name: Plan Terraform changes
         working-directory: ./terraform
         id: plan
         if: ${{ github.event_name == 'pull_request' }}
         run: terraform plan -no-color -input=false
         continue-on-error: true
-      - name: pass or fail
+
+      - name: Pass or fail
         uses: actions/github-script@v6
         if: ${{ steps.plan.outcome == 'failure' }}
         with:
           script: |
             core.setFailed('Plan failed!')
-      - name: terraform apply
+
+      - name: Apply Terraform changes
         id: apply
         working-directory: ./terraform
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
