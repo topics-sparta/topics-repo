@@ -64,4 +64,4 @@ jobs:
           --version-label "v${{ github.sha }}" \
           --description "Next.js deployment"
 
-          aws elasticbeanstalk update-environment --environment-name your-environment-name --version-label "v${{ github.sha }}"
+          aws elasticbeanstalk update-environment --environment-name sparta-environment --version-label "v${{ github.sha }}"
