@@ -49,7 +49,13 @@ jobs:
           aws-access-key-id: ${{ secrets.HENRY_GITHUB_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.HENRY_GITHUB_AWS_SECRET_ACCESS_KEY }}
           aws-region: "us-west-1"
-
+          
+      - name: Ensure Elastic Beanstalk application exists
+        run: |
+          if ! aws elasticbeanstalk describe-applications --application-names henry-sparta --region us-west-1 | grep -q "ApplicationName"; then
+            aws elasticbeanstalk create-application --application-name henry-sparta --description "Application for Henry's Sparta project" --region us-west-1
+          fi
+        
       - name: Upload Next.js build to AWS S3
         run: aws s3 cp sparta_build.zip s3://terraform-state-sparta-henrysua12/sparta_build-${{ github.sha }}.zip
 
