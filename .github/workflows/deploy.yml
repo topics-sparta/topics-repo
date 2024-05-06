@@ -6,7 +6,7 @@ on:
   workflow_run:
     workflows: [Test] # Triggered by the test workflow
     types: [completed] # The test workflow must complete
-    branches: [main] # Only when main is updated
+    branches: [johan_session10assignment] # Only when johan_session10assignment is updated
 
 jobs:
   on-success:
