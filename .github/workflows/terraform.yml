@@ -83,6 +83,5 @@ jobs:
             core.setFailed('Plan failed!')
       - name: terraform apply
         id: apply
-        working-directory: ./terraform
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        working-directory: ./terraform 
         run: terraform apply -auto-approve -input=false
