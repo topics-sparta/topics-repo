@@ -37,13 +37,16 @@ jobs:
             NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
             NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
 
+      - name: Create ZIP archive of Next.js build
+        run: zip -r nextjs_build.zip .next/*
+
       - name: Upload Next.js build artifact
         uses: actions/upload-artifact@v2
         with:
           name: nextjs_build
-          path: .next
+          path: nextjs_build.zip
 
-      - name: Congifure AWS Credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.JOHAN_GITHUB_ACTION_ACCESS_KEY_ID }}
@@ -51,7 +54,7 @@ jobs:
           aws-region: "us-east-1"
 
       - name: Upload Next.js build to AWS S3
-        run: aws s3 sync .next s3://johandelao-sparta
+        run: aws s3 cp nextjs_build.zip s3://johandelao-sparta/nextjs_build.zip
 
       - name: Deploy to AWS Elastic Beanstalk
         run: |
