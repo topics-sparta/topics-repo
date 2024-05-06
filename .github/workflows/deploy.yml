@@ -46,8 +46,8 @@ jobs:
       - name: Congifure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.JOHAN_TERRAFORM_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.JOHAN_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.JOHAN_GITHUB_ACTION_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.JOHAN_GITHUB_ACTION_SECRET_KEY }}
           aws-region: "us-east-1"
 
       - name: Upload Next.js build to AWS S3
