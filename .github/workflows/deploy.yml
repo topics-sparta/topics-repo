@@ -57,7 +57,7 @@ jobs:
         run: |
           aws elasticbeanstalk create-application-version \
           --application-name johandelao-sparta \
-          --source-bundle S3Bucket="terraform-state-sparta-henrysua12",S3Key="sparta_deploy-${{ github.sha }}.zip" \
+          --source-bundle S3Bucket="terraform-state-sparta-henrysua12",S3Key="sparta_build-${{ github.sha }}.zip" \
           --version-label "v${{ github.sha }}" \
           --description "Next.js deployment"
           aws elasticbeanstalk update-environment --environment-name sparta-environment --version-label "v${{ github.sha }}"
