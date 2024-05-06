@@ -1,7 +1,15 @@
-zip -r "sparta_deploy-$1.zip" ./*
+zip -r "mansij_sparta_deploy-${{ github.sha }}.zip" ./*
 
-aws s3 cp "sparta_deploy-$1.zip" s3://terraform-state-sparta-mansijmishra
+aws s3 cp "mansij_sparta_deploy-${{ github.sha }}.zip" s3://mansijmishra-sparta
 
-aws elasticbeanstalk create-application-version --application-name sparta --source-bundle S3Bucket="terraform-state-sparta-mansijmishra",S3Key="sparta_deploy-$1.zip" --version-label "ver-$1" --description "sparta deployment" --region "us-east-1"
+aws elasticbeanstalk create-application-version \
+    --application-name mansijmishra-sparta \
+    --source-bundle S3Bucket="mansijmishra-sparta",S3Key="mansij_sparta_deploy-${{ github.sha }}.zip" \
+    --version-label "ver-${{ github.sha }}" \
+    --description "file permissions" \
+    --region "us-east-1"
 
-aws elasticbeanstalk update-environment --environment-name sparta-environment --version-label "ver-$1" --region "us-east-1"
+aws elasticbeanstalk update-environment \
+    --environment-name sparta-environment \
+    --version-label "ver-${{ github.sha }}" \
+    --region "us-east-1"
