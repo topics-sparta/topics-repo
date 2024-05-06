@@ -56,7 +56,7 @@ jobs:
       - name: Deploy to AWS Elastic Beanstalk
         run: |
           aws elasticbeanstalk create-application-version \
-          --application-name sparta \
+          --application-name henry-sparta \
           --source-bundle S3Bucket="terraform-state-sparta-henrysua12",S3Key="sparta_build-${{ github.sha }}.zip" \
           --version-label "v${{ github.sha }}" \
           --description "Next.js deployment"
