@@ -54,7 +54,7 @@ jobs:
           aws-region: "us-east-1"
 
       - name: Upload Next.js build to AWS S3
-        run: aws s3 cp johan_sparta_deploy-${{ github.sha }}.zip s3://johandelao-sparta/nextjs_build.zip
+        run: aws s3 cp nextjs_build.zip s3://johandelao-sparta/johan_sparta_deploy-${{ github.sha }}.zip
 
       - name: Deploy to AWS Elastic Beanstalk
         run: |
