@@ -1,0 +1,57 @@
+name: deploy
+
+on:
+    workflow_run:
+        workflows: [test]
+        types: [completed]
+        branches: [main]
+
+jobs:
+    on-success:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: '20'  
+
+            - name: Install dependencies
+              run: |
+                npm install
+
+            - name: Build Next.js application
+              run: |
+                npm run build
+
+            - name: Package application
+              run: zip -r "sparta_deploy-${{github.sha}}.zip" ./*
+
+            - name: Upload application artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: sparta_application_artifact
+                path: sparta_deploy-${{github.sha}}.zip
+
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v2
+              with:
+                aws-access-key-id: ${{ secrets.MANSIJ_GITHUB_AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.MANSIJ_GITHUB_SECRET_ACCESS_KEY }}
+                aws-region: "us-east-1"
+
+            - name: Upload application file to AWS
+              run: aws s3 cp sparta_deploy-${{github.sha}}.zip s3://terraform-state-sparta-mansijmishra
+
+            - name: Create new application version
+              run: |
+                aws elasticbeanstalk create-application-version \
+                --application-name sparta \
+                --source-bundle S3Bucket="terraform-state-sparta-mansijmishra",S3Key="sparta_deploy-${{github.sha}}.zip" \
+                --version-label "ver-${{ github.sha }}" \
+                --description "commit-sha-${{ github.sha }}"
+
+            - name: Deploy application
+              run: aws elasticbeanstalk update-environment --environment-name sparta-assignment --version-label "ver-${{ github.sha }}"
