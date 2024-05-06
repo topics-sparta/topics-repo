@@ -1,58 +1,63 @@
 name: deploy
 
 on:
-  workflow_run:
-    workflows: [Test] # Triggered by the test workflow
-    types: [completed] # The test workflow must complete
-    branches: [main] # Only when main is updated
-    
+  #   workflow_run:
+  #     workflows: [Test] # Triggered by the test workflow
+  #     types: [completed] # The test workflow must complete
+    push:
+      branches: [main]
+    pull_request:
+      branches: [main]
 
 jobs:
-  deploy:
+  on-success:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} # Only when test completed successfully 
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }} # Only when test completed successfully 
+    defaults:
+        run:
+          working-directory: ./topics-project
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.2.0'
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install wheel
-          pip install -r requirements-dev.txt
-          pip install -e .
-      
-      - name: Prepare Application
-        run: |
-          # If any preparation is needed for your application, perform it here
+          npm install
+      - name: Build the Next.js project
+        run: npm run build
+        env:
+            NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
 
-      - name: Build and Upload Artifact
-        run: |
-          # Replace this command with the one to create your deployable artifact
-          zip -r "sparta_deploy-${{ github.sha }}.zip" ./*
-          
-      - name: Upload Application Artifact
-        uses: actions/upload-artifact@v3
+      - name: Create ZIP archive of Next.js build
+        run: zip -r sparta_build.zip .next/*
+
+      - name: Upload Next.js build artifact
+        uses: actions/upload-artifact@v2
         with:
-          name: sparta_application_artifact
-          path: sparta_deploy-${{ github.sha }}.zip
+          name: sparta_build
+          path: sparta_build.zip
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.HENRY_GITHUB_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.HENRY_GITHUB_AWS_SECRET_ACCESS_KEY  }}
-          aws-region: "us-west-1" 
+          aws-secret-access-key: ${{ secrets.HENRY_GITHUB_AWS_SECRET_KEY }}
+          aws-region: "us-west-1"
 
-      - name: Upload Application File to S3
-        run: aws s3 cp sparta_deploy-${{ github.sha }}.zip s3://terraform-state-sparta-henrysua12
+      - name: Upload Next.js build to AWS S3
+        run: aws s3 cp sparta_build.zip s3://terraform-state-sparta-henrysua12-${{ github.sha }}.zip
 
-      - name: Create New Application Version
-        run: |  
+      - name: Deploy to AWS Elastic Beanstalk
+        run: |
           aws elasticbeanstalk create-application-version \
-          --application-name sparta \
+          --application-name johandelao-sparta \
           --source-bundle S3Bucket="sparta",S3Key="sparta_deploy-${{ github.sha }}.zip" \
-          --version-label "ver-${{ github.sha }}" \
-          --description "commit-sha-${{ github.sha }}"
-
-      - name: Deploy Application
-        run: aws elasticbeanstalk update-environment --environment-name sparta-environment --version-label "ver-${{ github.sha }}"
+          --version-label "v${{ github.sha }}" \
+          --description "Next.js deployment"
+          aws elasticbeanstalk update-environment --environment-name sparta-environment --version-label "v${{ github.sha }}"
