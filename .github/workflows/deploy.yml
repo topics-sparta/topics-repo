@@ -1,0 +1,54 @@
+# This workflow will deploy the application to the running environment after a successful merge to main
+
+name: deploy
+
+on:
+  workflow_run:
+    workflows: [test] # Triggered by the test workflow
+    types: [completed] # The test workflow must complete
+    branches: [main] # Only when main is updated
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} # Only when test completed successfully 
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build the Next.js project
+        run: npm run build
+
+      - name: Upload Next.js build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: nextjs_build
+          path: .next
+
+      - name: Congifure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.JOHAN_TERRAFORM_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.JOHAN_SECRET_ACCESS_KEY }}
+          aws-region: "us-east-1"
+
+      - name: Upload Next.js build to AWS S3
+        run: aws s3 sync .next s3://your-bucket-name
+
+      - name: Deploy to AWS Elastic Beanstalk
+        run: |
+          aws elasticbeanstalk create-application-version \
+          --application-name sparta \
+          --source-bundle S3Bucket="johandelao-sparta",S3Key="johan_sparta_deploy-${{ github.sha }}.zip" \
+          --version-label "v${{ github.sha }}" \
+          --description "Next.js deployment"
+
+          aws elasticbeanstalk update-environment --environment-name your-environment-name --version-label "v${{ github.sha }}"
