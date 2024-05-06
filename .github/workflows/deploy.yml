@@ -51,13 +51,13 @@ jobs:
           aws-region: "us-west-1"
 
       - name: Upload Next.js build to AWS S3
-        run: aws s3 cp sparta_build.zip s3://terraform-state-sparta-henrysua12-${{ github.sha }}.zip
+        run: aws s3 cp sparta_build.zip s3://terraform-state-sparta-henrysua12/sparta_build-${{ github.sha }}.zip
 
       - name: Deploy to AWS Elastic Beanstalk
         run: |
           aws elasticbeanstalk create-application-version \
           --application-name johandelao-sparta \
-          --source-bundle S3Bucket="sparta",S3Key="sparta_deploy-${{ github.sha }}.zip" \
+          --source-bundle S3Bucket="terraform-state-sparta-henrysua12",S3Key="sparta_deploy-${{ github.sha }}.zip" \
           --version-label "v${{ github.sha }}" \
           --description "Next.js deployment"
           aws elasticbeanstalk update-environment --environment-name sparta-environment --version-label "v${{ github.sha }}"
