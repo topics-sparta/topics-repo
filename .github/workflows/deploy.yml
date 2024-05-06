@@ -3,9 +3,9 @@
 name: deploy
 
 on:
-  workflow_run:
-    workflows: [Test] # Triggered by the test workflow
-    types: [completed] # The test workflow must complete
+#   workflow_run:
+#     workflows: [Test] # Triggered by the test workflow
+#     types: [completed] # The test workflow must complete
   push:
     branches: [main]
   pull_request:
