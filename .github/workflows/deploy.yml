@@ -51,7 +51,7 @@ jobs:
           aws-region: "us-east-1"
 
       - name: Upload Next.js build to AWS S3
-        run: aws s3 sync .next s3://your-bucket-name
+        run: aws s3 sync .next s3://johandelao-sparta
 
       - name: Deploy to AWS Elastic Beanstalk
         run: |
