@@ -12,7 +12,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-8/12 h-14 mx-auto mt-10">
+    <div className="w-10/12 md:w-8/12 h-14 mx-auto mt-5 md:mt-10">
       <form
         className="w-full h-full relative text-customPrimary transition-colors bg-customSecondary/80 hover:bg-customSecondary rounded-full overflow-hidden"
         onSubmit={handleSubmit}

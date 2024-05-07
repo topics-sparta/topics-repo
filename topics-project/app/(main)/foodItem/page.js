@@ -5,6 +5,7 @@ import { ChevronLeft, Loader, Plus } from "lucide-react";
 import { PieChart } from "react-minimal-pie-chart";
 import MealTimeDropDown from "../_components/mealTimeDropdown";
 import { fetchFoodInfo } from "../barcode/actions";
+import { useRouter } from "next/navigation";
 
 export default function FoodItem() {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +13,7 @@ export default function FoodItem() {
   const [macros, setMacros] = useState(
     {
       name: "",
-      brand: "",
+      brandName: "",
       servingSize: 0,
       servingSizeUnit: "",
       calories: 0,
@@ -23,6 +24,7 @@ export default function FoodItem() {
   )
   const foodItemParams = useSearchParams();
   const barcode = foodItemParams.get("barcode");
+  const router = useRouter();
 
   useEffect(() => {
     // TO DO: Once the response is retrieved, then display either an error page or the actual food-item page
@@ -52,7 +54,7 @@ export default function FoodItem() {
     <div className="w-full h-screen flex relative bg-customSecondary/25 lg:bg-customPrimary">
       <div className="w-11/12 mx-auto h-full flex flex-col">
         <div className="w-full mt-4 grid gap-2 grid-cols-12 lg:flex items-start justify-between text-customAccent">
-          <div className="group col-span-1 flex w-full lg:w-fit gap-2 items-start justify-between text-customAccent">
+          <div className="group col-span-1 flex w-full lg:w-fit gap-2 items-start justify-between text-customAccent hover:text-customSecondary cursor-pointer transition-colors" onClick={() => router.back()}>
             <ChevronLeft className="translate-x-0 group-hover:-translate-x-2 w-12 mt-[2px] transition-transform" />
           </div>
           <div className="col-span-11 flex flex-col gap-4 w-full">
@@ -61,7 +63,7 @@ export default function FoodItem() {
                 {macros["name"]}
               </p>
               <div className="w-full lg:gap-4 lg:w-fit flex justify-between items-center text-customAccent/60">
-                <p className="text-base font-bold">{macros["brand"]}</p>
+                <p className="text-base font-bold">{macros["brandName"]}</p>
                 <p className="text-base font-medium">
                   {"Serving Size: " +
                     macros["servingSize"] +
