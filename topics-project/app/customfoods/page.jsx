@@ -1,11 +1,27 @@
 
 "use client";
 import { sendData, } from "./action"
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { createClient} from "@/utils/supabase/client";
 
 
 export default function CustomFoodForm() {
+  const supabase = createClient();
+
+  const [userID, setUserID] = useState("");
+
+  useEffect(() => {
+    const getUserID = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error("Error fetching user:", error.message);
+      } else {
+        setUserID(data.user.id);
+      }
+    };
+    getUserID();
+  }, []);
+
   // states for out forms
   const [formData, setFormData] = useState({
     food_name: '',
@@ -32,11 +48,12 @@ export default function CustomFoodForm() {
         carbs: formData.carbs === "" ? 0 : formData.carbs,
       };
       // send to supabase
-      await sendData(handledformData);
+      await sendData(handledformData, userID);
 
       // clear the form 
       setFormData({
         food_name: '',
+        servings: '',
         calories: '',
         protein: '',
         fat: '',
@@ -61,6 +78,18 @@ export default function CustomFoodForm() {
         name="food_name"
         type="text"
         value={formData.food_name}
+        onChange={handleChange}
+        required
+      />
+      <label className="text-[18px] text-[#4C220A]" htmlFor="quantity">Servings:</label>
+        <input
+        className="border-2 border-[#4C220A] p-2 rounded"
+        placeholder="Enter the amount of servings"
+        id="servings"
+        name="servings"
+        type="number"
+        min="1"
+        value={formData.servings}
         onChange={handleChange}
         required
       />
