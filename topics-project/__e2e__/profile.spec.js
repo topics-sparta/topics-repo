@@ -9,7 +9,7 @@ test("page successfully fetches user", async ({ page }) => {
   await page.getByPlaceholder("Enter email").press("Tab");
   await page.getByPlaceholder("Enter password").fill("password");
   await page.getByPlaceholder("Enter password").press("Enter");
-  await page.getByText("Settings").click();
+  await page.getByText("Settings").first().click();
 
   // expect the following to be visible
   await expect(page.locator('input[name="height"]')).toBeVisible();
@@ -31,7 +31,7 @@ test("page successfully updates user", async ({ page }) => {
   await page.getByPlaceholder("Enter email").press("Tab");
   await page.getByPlaceholder("Enter password").fill("password");
   await page.getByPlaceholder("Enter password").press("Enter");
-  await page.getByText("Settings").click();
+  await page.getByText("Settings").first().click();
 
   // go back to url
   await page.waitForURL("http://localhost:3000/settings/profile");

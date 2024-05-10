@@ -9,7 +9,7 @@ test("component renders correctly", async ({ page }) => {
   await page.getByPlaceholder("Enter email").press("Tab");
   await page.getByPlaceholder("Enter password").fill("password");
   await page.getByPlaceholder("Enter password").press("Enter");
-  await page.getByText("Add Food").click();
+  await page.getByText("Add Food").first().click();
 
   // expect items
 
@@ -41,6 +41,7 @@ test("recieves food name from user and shows retults in [food_query] directory",
   await page
     .locator("div")
     .filter({ hasText: /^Add Food$/ })
+    .first()
     .click();
   await page.getByPlaceholder("Search for any foods...").click();
   await page.getByPlaceholder("Search for any foods...").click();
@@ -66,6 +67,7 @@ test("recieves and INCORRECT food from user and displays no results", async ({
   await page
     .locator("div")
     .filter({ hasText: /^Add Food$/ })
+    .first()
     .click();
   await page.getByPlaceholder("Search for any foods...").click();
   await page.getByPlaceholder("Search for any foods...").click();
