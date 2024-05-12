@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -40,8 +40,10 @@
   "devDependencies": {
     "@iconify/react": "^4.1.1",
     "@playwright/test": "^1.42.1",
+    "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
+    "@testing-library/user-event": "^14.5.2",
     "@types/node": "^20.11.28",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
