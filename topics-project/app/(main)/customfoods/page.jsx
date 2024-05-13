@@ -1,6 +1,6 @@
 
 "use client";
-import { sendData, } from "./action"
+import { sendData } from "./action"
 import { useState, useEffect } from "react";
 import { createClient} from "@/utils/supabase/client";
 

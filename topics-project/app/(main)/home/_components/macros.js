@@ -1,3 +1,5 @@
+import { useMediaQuery } from "usehooks-ts";
+
 export const Macros = ({
   protein,
   fat,
@@ -6,6 +8,7 @@ export const Macros = ({
   fatGoal,
   carbGoal,
 }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
     <div className="bg-customSecondary/25 rounded-2xl w-6/12 p-3 md:p-4 h-52 md:h-72 max-w-72">
       <div className="h-full w-full">
@@ -21,9 +24,8 @@ export const Macros = ({
                 <div className="h-full w-full grid grid-rows-6 grid-cols-1 justify-items-center">
                   <div className="relative rounded-full row-span-5 col-span-1 w-10/12 md:w-8/12 h-full bg-customPrimary">
                     <div
-                      className={`absolute bottom-0 left-0 right-0 h-[${
-                        (protein / proteinGoal) * 100
-                      }%] min-h-10 md:min-h-14 rounded-full bg-customSecondary max-h-full`}
+                      style={isMobile == true ? {height: `calc(${(protein / proteinGoal) * 100}% + 1rem)`} : {height: `calc(${(protein / proteinGoal) * 100}% + 2rem)`}}
+                      className={`absolute bottom-0 left-0 right-0 min-h-10 md:min-h-14 rounded-full bg-customSecondary max-h-full`}
                     >
                       <div className="absolute top-0 left-0 right-0">
                         <div className="h-10 md:h-14 w-full rounded-full border-4 md:border-[5px] border-customSecondary bg-customPrimary flex justify-center items-center">
@@ -46,9 +48,8 @@ export const Macros = ({
                 <div className="h-full w-full grid grid-rows-6 grid-cols-1 justify-items-center">
                   <div className="relative rounded-full row-span-5 col-span-1 w-10/12 md:w-8/12 h-full bg-customPrimary">
                       <div
-                      className={`absolute bottom-0 left-0 right-0 h-[${
-                        (fat / fatGoal) * 100
-                      }%] min-h-10 md:min-h-14 max-h-full rounded-full bg-customSecondary`}
+                      style={isMobile == true ? {height: `calc(${(fat / fatGoal) * 100}% + 1rem)`} : {height: `calc(${(fat / fatGoal) * 100}% + 2rem)`}}
+                      className={`absolute bottom-0 left-0 right-0 min-h-10 md:min-h-14 max-h-full rounded-full bg-customSecondary`}
                     >
                       <div className="absolute top-0 left-0 right-0">
                         <div className="h-10 md:h-14 w-full rounded-full border-4 md:border-[5px] border-customSecondary bg-customPrimary flex justify-center items-center">
@@ -71,9 +72,8 @@ export const Macros = ({
                 <div className="h-full w-full grid grid-rows-6 grid-cols-1 justify-items-center">
                   <div className="relative rounded-full row-span-5 col-span-1 w-10/12 md:w-8/12 h-full bg-customPrimary">
                     <div
-                      className={`absolute bottom-0 left-0 right-0 h-[${
-                        (carbs / carbGoal) * 100
-                      }%] min-h-10 md:min-h-14 rounded-full bg-customSecondary max-h-full`}
+                      style={isMobile == true ? {height: `calc(${(carbs / carbGoal) * 100}% + 1rem)`} : {height: `calc(${(carbs / carbGoal) * 100}% + 2rem)`}}
+                      className={`absolute bottom-0 left-0 right-0 min-h-10 md:min-h-14 rounded-full bg-customSecondary max-h-full`}
                     >
                       <div className="absolute top-0 left-0 right-0">
                         <div className="h-10 md:h-14 w-full rounded-full border-4 md:border-[5px] border-customSecondary bg-customPrimary flex justify-center items-center">
