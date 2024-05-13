@@ -6,10 +6,13 @@ import { PieChart } from "react-minimal-pie-chart";
 import MealTimeDropDown from "../_components/mealTimeDropdown";
 import { fetchFoodInfo } from "../barcode/actions";
 import { useRouter } from "next/navigation";
+import { sendData } from "../customfoods/action";
+import { createClient } from "@/utils/supabase/client";
 
 export default function FoodItem() {
   const [isLoading, setIsLoading] = useState(true);
   const [numberOfServings, setNumberOfServings] = useState(1);
+  const [isButtonLoading, setIsButtonLoading] = useState(false)
   const [macros, setMacros] = useState(
     {
       name: "",
@@ -26,6 +29,29 @@ export default function FoodItem() {
   const barcode = foodItemParams.get("barcode");
   const router = useRouter();
 
+  const supabase = createClient();
+  const [userID, setUserID] = useState("");
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    setIsButtonLoading(true);
+    try {
+      // if our forms have empty values change them to 0s
+      const handledformData = {
+        food_name: macros.name,
+        servings: numberOfServings,
+        calories: macros.calories,
+        protein: macros.protein,
+        fat: macros.fat,
+        carbs: macros.carbohydrates
+      };
+      // send to supabase
+      await sendData(handledformData, userID).then(() => setIsButtonLoading(false));
+      } catch (error) {
+        console.log(error)
+      }
+  }
+
   useEffect(() => {
     // TO DO: Once the response is retrieved, then display either an error page or the actual food-item page
     // This is the case if wrong response is retrieved (an error)
@@ -33,7 +59,16 @@ export default function FoodItem() {
       const foodInfo = await fetchFoodInfo(barcode);
       setMacros(foodInfo);
     }
-    fetchMacros()
+    const getUserID = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error("Error fetching user:", error.message);
+      } else {
+        setUserID(data.user.id);
+      }
+    };
+    getUserID();
+    fetchMacros();
 
     if (macros === null) {
       setIsLoading(true);
@@ -155,9 +190,9 @@ export default function FoodItem() {
               <hr className="w-full text-customAccent bg-customAccent/20 h-[2px]" />
             </div>
             <div className="flex flex-col gap-1 lg:gap-2 w-full lg:w-5/12">
-              <button className="w-full h-10 rounded-full lg:rounded-md bg-customSecondary/80 hover:bg-customSecondary transition-colors text-customPrimary flex gap-1 items-center justify-center">
-                <Plus className="w-4 h-4" />
-                <p className="font-medium text-base lg:text-lg">Add Item</p>
+              <button className="w-full h-10 rounded-full lg:rounded-md bg-customSecondary/80 hover:bg-customSecondary transition-colors text-customPrimary" onClick={(e) => handleAdd(e)}>
+                {!isButtonLoading ? <div className="flex gap-1 items-center justify-center h-full w-full"><Plus className="w-4 h-4" />
+                <p className="font-medium text-base lg:text-lg">Add Item</p></div> : <div className="flex gap-1 items-center justify-center h-full w-full"><Loader className="w-4 h-4 animate-spin" /></div>}
               </button>
               <p className="text-xs text-customAccent/40">*Data is provided by the US Dept. of Agriculture’s Food Central API </p>
             </div>

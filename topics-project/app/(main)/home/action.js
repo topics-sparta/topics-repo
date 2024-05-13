@@ -87,7 +87,8 @@ export const useFetchNutritionByDate = (userID, date) => {
         } else {
           const entries = data.data_by_date.map(entry => ({
             foodName: entry.food_name, 
-            calories: entry.calories    
+            calories: entry.calories,
+            servings: entry.servings    
           }));
           setNutritionEntries(entries);
         }
