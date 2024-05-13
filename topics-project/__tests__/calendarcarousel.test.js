@@ -5,6 +5,19 @@ import '@testing-library/jest-dom';
 import { CalendarCarousel } from '../app/(main)/home/_components/calendarcarousel';
 import { format, addDays, startOfToday } from 'date-fns';
 
+beforeAll(() => {
+  window.matchMedia = jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  }));
+});
+
 describe('CalendarCarousel Component', () => {
   const mockOnDateChange = jest.fn();
 

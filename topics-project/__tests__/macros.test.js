@@ -3,6 +3,19 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Macros from "../app/(main)/home/_components/macros";
 
+beforeAll(() => {
+    window.matchMedia = jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
+  });
+
 const protein = 100;
 const proteinGoal = 150;
 
