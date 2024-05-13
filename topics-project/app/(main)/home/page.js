@@ -63,7 +63,7 @@ export default function HomePage() {
             key={index}
             foodName={entry.foodName}
             mealType="Unknown"
-            quantity={1}
+            quantity={entry.servings}
             kcals={entry.calories}
           />
         ))}

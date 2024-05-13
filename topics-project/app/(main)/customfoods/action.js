@@ -16,6 +16,7 @@ export async function sendData(handledformData , userID) {
           protein: handledformData.protein * handledformData.servings,
           fat: handledformData.fat * handledformData.servings,
           carbs: handledformData.carbs * handledformData.servings,
+          servings: handledformData.servings
         },
         
       ]);

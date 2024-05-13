@@ -93,7 +93,7 @@ export default function CustomFoodForm() {
         onChange={handleChange}
         required
       />
-      <label className="text-[18px] text-[#4C220A]" htmlFor="calories">Calorie Count:</label>
+      <label className="text-[18px] text-[#4C220A]" htmlFor="calories">Calorie Count (per serving):</label>
       <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the calorie amount (Kcal)"
@@ -105,7 +105,7 @@ export default function CustomFoodForm() {
         onChange={handleChange}
         required
       />
-      <label className="text-[18px] text-[#4C220A]" htmlFor="protein">Protein:</label>
+      <label className="text-[18px] text-[#4C220A]" htmlFor="protein">Protein (per serving):</label>
       <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the protein amount (g)"
@@ -116,7 +116,7 @@ export default function CustomFoodForm() {
         onChange={handleChange}
         type="number"
       />
-      <label className="text-[18px] text-[#4C220A]" htmlFor="fat">Fat:</label>
+      <label className="text-[18px] text-[#4C220A]" htmlFor="fat">Fat (per serving):</label>
       <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the fat amount (g)"
@@ -127,7 +127,7 @@ export default function CustomFoodForm() {
         onChange={handleChange}
         type="number"
       />
-      <label className="text-[18px] text-[#4C220A]" htmlFor="carbs">Carbs:</label>
+      <label className="text-[18px] text-[#4C220A]" htmlFor="carbs">Carbs (per serving):</label>
       <input
         className="border-2 border-[#4C220A] p-2 rounded"
         placeholder="Enter the carbs amount (g)" 
