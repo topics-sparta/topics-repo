@@ -1,0 +1,63 @@
+name: deploy
+
+on:
+  #   workflow_run:
+  #     workflows: [Test] # Triggered by the test workflow
+  #     types: [completed] # The test workflow must complete
+    push:
+      branches: [main]
+    pull_request:
+      branches: [main]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }} # Only when test completed successfully 
+    defaults:
+        run:
+          working-directory: ./topics-project
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.2.0'
+
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Build the Next.js project
+        run: npm run build
+        env:
+            NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
+
+      - name: Create ZIP archive of Next.js build
+        run: zip -r sparta_build.zip .next/*
+
+      - name: Upload Next.js build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: sparta_build
+          path: sparta_build.zip
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.HENRY_GITHUB_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.HENRY_GITHUB_AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-west-1"
+
+      - name: Upload Next.js build to AWS S3
+        run: aws s3 cp sparta_build.zip s3://terraform-state-sparta-henrysua12/sparta_build-${{ github.sha }}.zip
+
+      - name: Deploy to AWS Elastic Beanstalk
+        run: |
+          aws elasticbeanstalk create-application-version \
+          --application-name henry-sparta \
+          --source-bundle S3Bucket="terraform-state-sparta-henrysua12",S3Key="sparta_build-${{ github.sha }}.zip" \
+          --version-label "v${{ github.sha }}" \
+          --description "Next.js deployment"
+          aws elasticbeanstalk update-environment --environment-name sparta-environment --version-label "v${{ github.sha }}"
